@@ -1,1 +1,1 @@
-const DEAL_EMAIL_TO = "urbandwellsolutions@gmail.com";
+https://hooks.zapier.com/hooks/catch/26580778/u0y1k4j/
