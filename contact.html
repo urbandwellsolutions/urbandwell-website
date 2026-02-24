@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    form { display: grid; gap: 12px; }
+    input, textarea, button { font-size: 16px; padding: 12px; }
+    textarea { min-height: 140px; resize: vertical; }
+    button { cursor: pointer; }
+    #zap-status { margin-top: 12px; }
+  </style>
+</head>
 
+<body>
+  <h1>Contact Us</h1>
+
+  <!-- ✅ IMPORTANT:
+       - form id MUST be "zap-form"
+       - each field MUST have a name attribute
+  -->
+  <form id="zap-form">
+    <input type="text" name="name" placeholder="Your name" required />
+    <input type="email" name="email" placeholder="Your email" required />
+    <input type="text" name="subject" placeholder="Subject" />
+    <textarea name="message" placeholder="Your message" required></textarea>
+
+    <button type="submit" id="zap-submit">Send</button>
+  </form>
+
+  <p id="zap-status"></p>
+
+  <script>
+    // Your Zapier Catch Hook URL
+    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0y1k4j/";
+
+    const form = document.getElementById("zap-form");
+    const statusEl = document.getElementById("zap-status");
+    const submitBtn = document.getElementById("zap-submit");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      statusEl.textContent = "Sending...";
+      submitBtn.disabled = true;
+
+      // Grab all form fields into an object
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch(ZAPIER_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+          throw new Error(`Request failed: ${res.status} ${res.statusText}`);
+        }
+
+        statusEl.textContent = "Sent ✅";
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Error ❌ (Open DevTools Console)";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
