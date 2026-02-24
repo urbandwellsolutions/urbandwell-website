@@ -1,74 +1,341 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Form</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
-    form { display: grid; gap: 12px; }
-    input, textarea, button { font-size: 16px; padding: 12px; }
-    textarea { min-height: 140px; resize: vertical; }
-    button { cursor: pointer; }
-    #zap-status { margin-top: 12px; }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Urban Dwell Solutions | RV Park Acquisition & Deal Structuring</title>
+  <meta name="description" content="Nationwide RV Park acquisition and deal structuring. Wholesalers. Brokers. Owners." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <h1>Contact Us</h1>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- ✅ IMPORTANT:
-       - form id MUST be "zap-form"
-       - each field MUST have a name attribute
-  -->
-  <form id="zap-form">
-    <input type="text" name="name" placeholder="Your name" required />
-    <input type="email" name="email" placeholder="Your email" required />
-    <input type="text" name="subject" placeholder="Subject" />
-    <textarea name="message" placeholder="Your message" required></textarea>
+  <!-- Background glow -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__blob bg__blob--a"></div>
+    <div class="bg__blob bg__blob--b"></div>
+    <div class="bg__noise"></div>
+  </div>
 
-    <button type="submit" id="zap-submit">Send</button>
-  </form>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="Urban Dwell Solutions home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">
+          <span class="brand__name">Urban Dwell Solutions</span>
+          <span class="brand__tag">RV Park Acquisition • Deal Structuring</span>
+        </span>
+      </a>
 
-  <p id="zap-status"></p>
+      <nav class="nav" aria-label="Primary">
+        <a class="btn btn--ghost" href="#submit">Submit a Deal</a>
+        <a class="btn btn--ghost" href="#brokers">Brokers</a>
+        <a class="btn btn--ghost" href="#wholesalers">Wholesalers</a>
+        <a class="btn btn--ghost" href="#process">Process</a>
+      </nav>
 
-  <script>
-    // Your Zapier Catch Hook URL
-    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0y1k4j/";
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
 
-    const form = document.getElementById("zap-form");
-    const statusEl = document.getElementById("zap-status");
-    const submitBtn = document.getElementById("zap-submit");
+    <div class="mobileMenu" id="mobileMenu" hidden>
+      <div class="container mobileMenu__inner">
+        <a class="btn btn--ghost" href="#submit">Submit a Deal</a>
+        <a class="btn btn--ghost" href="#brokers">Brokers</a>
+        <a class="btn btn--ghost" href="#wholesalers">Wholesalers</a>
+        <a class="btn btn--ghost" href="#process">Process</a>
+      </div>
+    </div>
+  </header>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1>Nationwide RV Park Acquisition &amp; Deal Structuring</h1>
+          <p class="lead">
+            Wholesalers. Brokers. Owners. Bring us mismanaged, underperforming, or creatively structured RV park opportunities.
+            If a deal doesn’t work cash — we structure it.
+          </p>
 
-      statusEl.textContent = "Sending...";
-      submitBtn.disabled = true;
+          <div class="pills" aria-label="Highlights">
+            <span class="pill">Value-Add RV Parks</span>
+            <span class="pill">Seller Finance / Hybrid</span>
+            <span class="pill">Broker-Friendly</span>
+            <span class="pill">48-Hour Review</span>
+          </div>
 
-      // Grab all form fields into an object
-      const data = Object.fromEntries(new FormData(form).entries());
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#submit">Submit a Deal</a>
+            <a class="btn btn--soft" href="#process">How it works</a>
+          </div>
 
-      try {
-        const res = await fetch(ZAPIER_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
+          <div class="hero__fine">
+            Focused on operational turnarounds, clean underwriting, and win-win structures.
+          </div>
+        </div>
 
-        if (!res.ok) {
-          throw new Error(`Request failed: ${res.status} ${res.statusText}`);
-        }
+        <div class="hero__card">
+          <div class="card">
+            <div class="card__top">
+              <div class="card__title">Quick Fit Check</div>
+              <div class="card__subtitle">Share basics. We’ll respond fast.</div>
+            </div>
 
-        statusEl.textContent = "Sent ✅";
-        form.reset();
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = "Error ❌ (Open DevTools Console)";
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  </script>
+            <ul class="checklist">
+              <li><span class="dot"></span> State / City + # of pads</li>
+              <li><span class="dot"></span> Current occupancy + rents</li>
+              <li><span class="dot"></span> Asking price / target</li>
+              <li><span class="dot"></span> Any seller finance terms</li>
+            </ul>
+
+            <a class="btn btn--primary btn--full" href="#submit">Submit an RV Park Deal</a>
+            <div class="micro">Prefer email? Use the form below — it will open your email app by default.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="submit">
+      <div class="container">
+        <div class="section__head">
+          <h2>Submit an RV Park Deal</h2>
+          <p class="muted">We respond fast. Send what you have — rent roll / P&amp;L / OM preferred.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <form class="form card" id="dealForm">
+            <div class="form__row">
+              <label>
+                <span>Name</span>
+                <input name="name" type="text" placeholder="Your name" autocomplete="name" required />
+              </label>
+
+              <label>
+                <span>I am a…</span>
+                <select name="role" required>
+                  <option value="Wholesaler">Wholesaler</option>
+                  <option value="Broker">Broker</option>
+                  <option value="Owner">Owner</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form__row">
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
+              </label>
+
+              <label>
+                <span>Phone</span>
+                <input name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel" />
+              </label>
+            </div>
+
+            <label>
+              <span>Deal Summary</span>
+              <textarea name="summary" rows="6" placeholder="State / City, # of pads, current occupancy, current rents, asking price, and any seller finance terms." required></textarea>
+            </label>
+
+            <div class="form__actions">
+              <button class="btn btn--primary" type="submit">Send Deal</button>
+              <a class="link" href="#process">How it works</a>
+            </div>
+
+            <div class="micro">
+              Next step (optional): connect this form to your email + CRM (Zapier/Make/Webhook). Placeholder is included in <code>script.js</code>.
+            </div>
+          </form>
+
+          <div class="card card--info">
+            <h3>What helps us move fast</h3>
+            <div class="muted">If you have any of these, include them in the summary or attach via email:</div>
+
+            <div class="infoGrid">
+              <div class="infoItem">
+                <div class="infoItem__k">Financials</div>
+                <div class="infoItem__v">T-12, P&amp;L, bank statements (if available)</div>
+              </div>
+              <div class="infoItem">
+                <div class="infoItem__k">Rent roll</div>
+                <div class="infoItem__v">Pad count, mix, occupancy, utilities</div>
+              </div>
+              <div class="infoItem">
+                <div class="infoItem__k">Offer terms</div>
+                <div class="infoItem__v">Price, seller finance, assumable debt, timeline</div>
+              </div>
+              <div class="infoItem">
+                <div class="infoItem__k">Photos / OM</div>
+                <div class="infoItem__v">Marketing package or basic photos</div>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout__title">48-hour review</div>
+              <div class="callout__text">If it fits, we’ll ask for deeper docs and move to underwriting.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section__head">
+          <h2>Process</h2>
+          <p class="muted">Simple, fast, and broker-friendly.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step card">
+            <div class="step__num">1</div>
+            <div class="step__body">
+              <h3>Submit</h3>
+              <p class="muted">Send the basics: location, pad count, occupancy, rents, price, and any creative terms.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step__num">2</div>
+            <div class="step__body">
+              <h3>Review</h3>
+              <p class="muted">We do a quick fit check and respond within 48 hours with next steps.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step__num">3</div>
+            <div class="step__body">
+              <h3>Structure</h3>
+              <p class="muted">If cash doesn’t pencil, we propose seller finance/hybrid structures that can.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step__num">4</div>
+            <div class="step__body">
+              <h3>Close</h3>
+              <p class="muted">Clean underwriting, tight communication, and a clear path to contract/close.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brokers">
+      <div class="container">
+        <div class="section__head">
+          <h2>Broker Partnership</h2>
+          <p class="muted">We protect relationships and move quickly with clear criteria.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <h3>Clear criteria</h3>
+            <p class="muted">Value-add parks, operational turnarounds, and opportunities with upside.</p>
+          </div>
+          <div class="card">
+            <h3>Fast feedback</h3>
+            <p class="muted">We’ll give a yes/no quickly and outline what we need to proceed.</p>
+          </div>
+          <div class="card">
+            <h3>Creative terms</h3>
+            <p class="muted">Seller finance, master lease options, assumption, and hybrid structures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="wholesalers">
+      <div class="container">
+        <div class="section__head">
+          <h2>Wholesalers</h2>
+          <p class="muted">Bring distressed or off-market. We’ll underwrite quickly and structure smart.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <h3>Off-market OK</h3>
+            <p class="muted">Even partial info works — send what you have and we’ll guide the rest.</p>
+          </div>
+          <div class="card">
+            <h3>Deal help</h3>
+            <p class="muted">We’ll help you tighten terms so it closes — not just “looks good”.</p>
+          </div>
+          <div class="card">
+            <h3>Repeatable</h3>
+            <p class="muted">If you source consistently, we’ll build a simple, repeatable flow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="problems">
+      <div class="container">
+        <div class="section__head">
+          <h2>Problems We Solve</h2>
+          <p class="muted">Common reasons a good RV park deal stalls — and how we fix it.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <div class="card">
+            <h3>Owners</h3>
+            <ul class="bullets">
+              <li>Underperforming operations</li>
+              <li>Deferred maintenance / management gaps</li>
+              <li>Need speed + certainty</li>
+              <li>Prefer flexible terms (seller finance)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Intermediaries</h3>
+            <ul class="bullets">
+              <li>Buyer needs structure to pencil</li>
+              <li>Docs incomplete / messy financials</li>
+              <li>Deal requires creative financing</li>
+              <li>Need fast underwriting response</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footerCTA card">
+          <div>
+            <div class="footerCTA__title">Have a deal?</div>
+            <div class="muted">Send it now — we’ll respond within 48 hours.</div>
+          </div>
+          <a class="btn btn--primary" href="#submit">Submit a Deal</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <div class="brand brand--small">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">
+            <span class="brand__name">Urban Dwell Solutions</span>
+            <span class="brand__tag">RV Park Acquisition • Deal Structuring</span>
+          </span>
+        </div>
+        <div class="micro">© <span id="year"></span> Urban Dwell Solutions. All rights reserved.</div>
+      </div>
+      <div class="footer__right">
+        <a class="link" href="#process">Process</a>
+        <a class="link" href="#brokers">Brokers</a>
+        <a class="link" href="#wholesalers">Wholesalers</a>
+        <a class="link" href="#submit">Submit</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
