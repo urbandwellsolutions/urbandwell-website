@@ -1,5 +1,5 @@
 (() => {
-  const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0y1k4j/";
+  const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0oscvm/";
   const form = document.getElementById("dealForm");
   if (!form) return;
 
@@ -18,9 +18,10 @@
       submittedAt: new Date().toISOString(),
     };
 
-    // Build form-encoded data (Zapier-friendly)
     const fd = new FormData();
-    Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
+    Object.entries(payload).forEach(([key, value]) => {
+      fd.append(key, value);
+    });
 
     try {
       if (submitBtn) {
@@ -33,7 +34,7 @@
         body: fd,
       });
 
-      if (!res.ok) throw new Error("Non-200 response");
+      if (!res.ok) throw new Error("Request failed");
 
       alert("✅ Deal sent successfully!");
       form.reset();
