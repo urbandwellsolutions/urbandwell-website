@@ -1,4 +1,3 @@
-
 :root{
   --bg0:#070b14;
   --bg1:#0b1220;
@@ -14,6 +13,9 @@
   --accentA:#4fd1c5;
   --accentB:#60a5fa;
   --accentC:#a78bfa;
+
+  --danger:#f87171;
+  --success:#4fd1c5;
 
   --container: 1120px;
 }
@@ -136,7 +138,7 @@ a{ color:inherit; text-decoration:none; }
   letter-spacing: .15px;
   white-space: nowrap;
   cursor:pointer;
-  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
 }
 .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.06); }
 .btn:active{ transform: translateY(0px); }
@@ -290,6 +292,7 @@ h3{
   background: rgba(0,0,0,.25);
   color: var(--text);
   outline: none;
+  min-height: 46px;
 }
 .form input::placeholder, .form textarea::placeholder{
   color: rgba(255,255,255,.45);
@@ -297,6 +300,18 @@ h3{
 .form input:focus, .form select:focus, .form textarea:focus{
   border-color: rgba(96,165,250,.45);
   box-shadow: 0 0 0 4px rgba(96,165,250,.12);
+}
+.form select{
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255,255,255,.55) 50%),
+    linear-gradient(135deg, rgba(255,255,255,.55) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 20px,
+    calc(100% - 12px) 20px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 38px;
 }
 
 .form__row{
@@ -368,6 +383,154 @@ h3{
 }
 .bullets li{ margin: 8px 0; }
 
+/* ================================
+   BUYER PAGE STYLES (INTEGRATED)
+================================ */
+
+/* Optional: put class="page--buyers" on <body> of buyer page */
+.page--buyers .hero{ padding: 46px 0 18px; }
+.page--buyers .lead{ max-width: 70ch; }
+
+/* Trust / proof bar */
+.trustBar{
+  display:flex; flex-wrap:wrap;
+  gap:10px;
+  margin: 14px 0 0;
+}
+.trustChip{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.82);
+  font-weight: 800;
+  font-size: 12.5px;
+}
+.trustChip .dot{ width:8px; height:8px; box-shadow: 0 0 0 3px rgba(79,209,197,.08); }
+
+/* Buyer / Buy Box card */
+.buyBoxCard{
+  background: linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.045));
+  border: 1px solid rgba(255,255,255,.14);
+}
+.buyBoxCard__title{
+  font-weight: 900;
+  letter-spacing: .2px;
+  margin: 0 0 6px;
+}
+.buyBoxCard__sub{
+  color: var(--muted2);
+  font-size: 13.5px;
+  margin: 0 0 10px;
+}
+
+/* Required marker (add class="req" to label text spans if you want) */
+.form .help{
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--muted2);
+  font-weight: 650;
+}
+.form .req::after{
+  content:" *";
+  color: rgba(96,165,250,.95);
+  font-weight: 900;
+}
+
+/* Inline checkbox/radio row (buyer preferences) */
+.form__inline{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin-top: 10px;
+}
+.form__inline input[type="checkbox"],
+.form__inline input[type="radio"]{
+  width:18px; height:18px;
+  accent-color: var(--accentB);
+  min-height:auto;
+}
+
+/* Criteria chips (optional if you use selectable chips) */
+.chipRow{
+  display:flex; flex-wrap:wrap;
+  gap:10px;
+  margin-top: 10px;
+}
+.chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.22);
+  color: rgba(255,255,255,.82);
+  font-weight: 800;
+  font-size: 12.5px;
+  cursor:pointer;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.chip:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.045); }
+.chip.is-active{
+  background: rgba(79,209,197,.10);
+  border-color: rgba(79,209,197,.28);
+}
+
+/* Form status messages (hook submit success/error) */
+.formStatus{
+  margin-top: 12px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.85);
+  font-weight: 800;
+  font-size: 13.5px;
+}
+.formStatus--success{
+  border-color: rgba(79,209,197,.28);
+  background: rgba(79,209,197,.08);
+}
+.formStatus--error{
+  border-color: rgba(248,113,113,.30);
+  background: rgba(248,113,113,.08);
+}
+
+/* Buyer Criteria / Info cards */
+.criteriaGrid{
+  display:grid;
+  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+}
+.criteriaCard{
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+.criteriaCard h3{ margin: 0 0 6px; }
+.criteriaCard p{ margin: 0; color: var(--muted); line-height: 1.55; }
+
+/* Sticky bottom CTA (optional on buyer page) */
+.stickyCTA{
+  position: sticky;
+  bottom: 14px;
+  z-index: 40;
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(6,9,17,.65);
+  backdrop-filter: blur(14px);
+  display:flex; align-items:center; justify-content:space-between; gap: 12px;
+}
+.stickyCTA__text{
+  color: rgba(255,255,255,.82);
+  font-weight: 900;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
 .footerCTA{
   margin-top: 16px;
   display:flex; align-items:center; justify-content:space-between;
@@ -413,4 +576,6 @@ h3{
 
   .mobileMenu__inner{ grid-template-columns: 1fr 1fr; }
   .btn{ border-radius: 18px; }
-    }
+
+  .criteriaGrid{ grid-template-columns: 1fr; }
+}
