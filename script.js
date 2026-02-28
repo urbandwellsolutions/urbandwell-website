@@ -1,142 +1,124 @@
 (() => {
-  // HOME PAGE "Submit a Deal" WEBHOOK (optional)
-  // If you don't want index page to send to Zapier, set this to "" and it will use mailto only.
-  const DEAL_WEBHOOK_URL = ""; // optional
+  // =========================
+  // CONFIG
+  // =========================
+  const DEAL_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0oscvm/";
 
-  const qs = (s) => document.querySelector(s);
+  const qs = (s, root = document) => root.querySelector(s);
 
-  // Mobile nav
-  const menuBtn = qs("#menuBtn");
-  const nav = qs("#nav");
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", () => {
-      const open = nav.classList.toggle("nav--open");
-      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  // =========================
+  // MOBILE MENU (matches your index.html)
+  // =========================
+  const hamburger = qs(".hamburger");
+  const mobileMenu = qs("#mobileMenu");
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", () => {
+      const isOpen = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", String(!isOpen));
+      mobileMenu.hidden = isOpen;
     });
 
+    // close menu after clicking any link
+    mobileMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        hamburger.setAttribute("aria-expanded", "false");
+        mobileMenu.hidden = true;
+      });
+    });
+
+    // close if user taps outside (mobile friendly)
     document.addEventListener("click", (e) => {
-      if (!nav.classList.contains("nav--open")) return;
-      if (nav.contains(e.target) || menuBtn.contains(e.target)) return;
-      nav.classList.remove("nav--open");
-      menuBtn.setAttribute("aria-expanded", "false");
+      if (mobileMenu.hidden) return;
+      const t = e.target;
+      if (hamburger.contains(t) || mobileMenu.contains(t)) return;
+      hamburger.setAttribute("aria-expanded", "false");
+      mobileMenu.hidden = true;
     });
   }
 
-  // Modal controls
-  const modal = qs("#dealModal");
-  const open1 = qs("#openDealModal");
-  const open2 = qs("#openDealModal2");
-  const open3 = qs("#openDealModal3");
-  const closeBtn = qs("#closeDealModal");
-  const status = qs("#dealStatus");
+  // =========================
+  // FOOTER YEAR
+  // =========================
+  const yearEl = qs("#year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // =========================
+  // FORM SUBMIT -> ZAPIER WEBHOOK
+  // =========================
   const form = qs("#dealForm");
+  const status = qs("#dealStatus");
   const submitBtn = qs("#dealSubmitBtn");
 
   const showStatus = (type, msg) => {
     if (!status) return;
+    status.style.display = "block";
     status.className = "status " + (type === "ok" ? "is-ok" : "is-err");
     status.textContent = msg;
-    status.style.display = "block";
   };
+
   const hideStatus = () => {
     if (!status) return;
     status.style.display = "none";
-    status.textContent = "";
     status.className = "status";
+    status.textContent = "";
   };
 
-  const openModal = () => {
-    if (!modal) return;
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    hideStatus();
+  const lock = (on) => {
+    if (!submitBtn) return;
+    submitBtn.disabled = on;
+    submitBtn.textContent = on ? "Sending…" : "Send Deal";
   };
 
-  const closeModal = () => {
-    if (!modal) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-  };
-
-  const bindOpen = (btn) => btn && btn.addEventListener("click", openModal);
-  bindOpen(open1);
-  bindOpen(open2);
-  bindOpen(open3);
-
-  closeBtn && closeBtn.addEventListener("click", closeModal);
-
-  // Close on overlay/cancel
-  modal && modal.addEventListener("click", (e) => {
-    const t = e.target;
-    if (t && t.dataset && t.dataset.close === "true") closeModal();
-  });
-
-  // Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) closeModal();
-  });
-
-  // Form submit (webhook optional, mailto fallback always)
   if (form) {
+    // Make sure the form never tries to navigate anywhere
+    form.setAttribute("action", "#");
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       hideStatus();
 
       const fd = new FormData(form);
       const name = (fd.get("name") || "").toString().trim();
+      const role = (fd.get("role") || "").toString().trim();
       const email = (fd.get("email") || "").toString().trim();
       const phone = (fd.get("phone") || "").toString().trim();
-      const role = (fd.get("role") || "").toString().trim();
       const summary = (fd.get("summary") || "").toString().trim();
 
-      if (!name || !email || !summary) {
-        showStatus("err", "Please fill Name, Email, and Property Summary.");
+      if (!name || !role || !email || !summary) {
+        showStatus("err", "Please complete Name, Role, Email, and Deal Summary.");
         return;
       }
 
       const payload = {
-        name, email, phone, role, summary,
+        name,
+        role,
+        email,
+        phone,
+        summary,
         pageUrl: window.location.href,
         submittedAt: new Date().toISOString(),
-        source: "submit-a-deal",
-      };
-
-      const lock = (on) => {
-        if (!submitBtn) return;
-        submitBtn.disabled = on;
-        submitBtn.textContent = on ? "Sending…" : "Send Deal";
-      };
-
-      const openMailto = () => {
-        const subject = encodeURIComponent("Submit a Deal — Urban Dwell Solutions");
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nRole: ${role}\n\nProperty Summary:\n${summary}\n\nPage: ${window.location.href}\nTime: ${payload.submittedAt}`
-        );
-        window.location.href = `mailto:Solutions@urbandwell.io?subject=${subject}&body=${body}`;
+        source: "home_submit_a_deal"
       };
 
       lock(true);
+      showStatus("ok", "Sending your deal…");
 
-      // If no webhook configured, go mailto immediately
-      if (!DEAL_WEBHOOK_URL) {
-        showStatus("ok", "Opening your email client to send the deal…");
-        openMailto();
-        lock(false);
-        form.reset();
-        return;
-      }
-
-      // Try webhook first; if CORS blocks reading, still show success
       try {
+        // Primary attempt (best case)
         const res = await fetch(DEAL_WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error("Webhook non-200");
-        showStatus("ok", "✅ Deal sent. We’ll respond quickly.");
+
+        if (!res.ok) throw new Error(`Webhook failed: ${res.status}`);
+
+        showStatus("ok", "✅ Deal submitted. We’ll respond quickly.");
         form.reset();
-      } catch (err1) {
+
+      } catch (err) {
+        // Fallback: some browsers block reading response due to CORS; still sends
         try {
           await fetch(DEAL_WEBHOOK_URL, {
             method: "POST",
@@ -144,12 +126,12 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
           });
-          showStatus("ok", "✅ Deal sent. (Browser can’t verify due to CORS.)");
+
+          showStatus("ok", "✅ Deal submitted. (Browser can’t verify due to CORS, but it was sent.)");
           form.reset();
         } catch (err2) {
-          console.error(err1, err2);
-          showStatus("err", "Webhook failed. Opening email client as fallback…");
-          openMailto();
+          console.error(err, err2);
+          showStatus("err", "Submit failed. Please try again or email Solutions@urbandwell.io.");
         }
       } finally {
         lock(false);
