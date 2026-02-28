@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Urban Dwell Solutions | RV Park Acquisition & Deal Structuring</title>
   <meta name="description" content="Nationwide RV Park acquisition and deal structuring. Wholesalers. Brokers. Owners." />
 
@@ -10,14 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- IMPORTANT: no ./ here, just styles.css -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Top glow background -->
-  <div class="bg">
+  <!-- Background glows -->
+  <div class="bg" aria-hidden="true">
     <div class="bg__glow bg__glow--a"></div>
     <div class="bg__glow bg__glow--b"></div>
     <div class="bg__glow bg__glow--c"></div>
@@ -41,7 +42,7 @@
       </button>
 
       <nav class="nav" id="nav" aria-label="Primary">
-        <a class="pill" href="#buyers">Buyer Network</a>
+        <a class="pill" href="buyers.html">Buyer Network</a>
         <a class="pill pill--active" href="#deal">Submit a Deal</a>
         <a class="pill" href="#brokers">Brokers</a>
         <a class="pill" href="#wholesalers">Wholesalers</a>
@@ -71,7 +72,7 @@
 
             <div class="ctaRow">
               <a class="btn btn--primary" href="#deal">Submit a Deal</a>
-              <a class="btn btn--ghost" href="#buyers">Join Buyer Network</a>
+              <a class="btn btn--ghost" href="buyers.html">Join Buyer Network</a>
               <a class="btn btn--subtle" href="#process">How it works</a>
             </div>
 
@@ -92,13 +93,14 @@
               <div class="quickfit__action">
                 <a class="btn btn--wide" href="#deal">Submit an RV Park Deal</a>
                 <div class="quickfit__fine">
-                  This form submits securely via webhook. If you prefer email: <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>
+                  This form submits securely via webhook. If you prefer email:
+                  <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Right hero card -->
+          <!-- Right panel -->
           <div class="hero__panel">
             <div class="panel card">
               <div class="panel__headline">What we look for</div>
@@ -137,6 +139,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -195,8 +198,7 @@
               </div>
 
               <div class="fine muted">
-                By submitting, you agree we may contact you about this deal. Prefer email? Send details to
-                <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
+                Prefer email? Send details to <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
               </div>
 
               <div class="status" id="status" aria-live="polite"></div>
@@ -265,35 +267,6 @@
             <div class="step__t">Close</div>
             <div class="step__d">Clean underwriting, tight communication, and a clear path to contract/close.</div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Placeholder sections -->
-    <section class="section" id="buyers">
-      <div class="container">
-        <div class="card">
-          <div class="card__title">Buyer Network</div>
-          <div class="card__sub">This section can link to your dedicated Buyer Network page.</div>
-          <a class="btn btn--ghost" href="buyer-network.html">Go to Buyer Network</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="brokers">
-      <div class="container">
-        <div class="card">
-          <div class="card__title">Brokers</div>
-          <div class="card__sub">Broker-friendly underwriting and quick feedback loops.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="wholesalers">
-      <div class="container">
-        <div class="card">
-          <div class="card__title">Wholesalers</div>
-          <div class="card__sub">Bring us opportunities — we’ll help structure what doesn’t pencil cash.</div>
         </div>
       </div>
     </section>
