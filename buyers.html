@@ -448,9 +448,9 @@
             </div>
           </div>
 
-          <!-- Helpful metadata -->
-          <input type="hidden" name="source_page" id="source_page" />
-          <input type="hidden" name="submitted_at" id="submitted_at" />
+          <!-- Hard markers for Zapier filtering / debugging -->
+          <input type="hidden" name="form_type" value="buyer_buy_box" />
+          <input type="hidden" name="mode" value="json" />
 
           <div class="actions">
             <button class="btn primary" type="submit" id="submitBtn">Submit Buy Box</button>
@@ -471,7 +471,7 @@
   </div>
 
   <script>
-    // ✅ Your Zapier webhook
+    // ✅ Zapier webhook (Buyer Zap)
     const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u06o7xe/";
 
     const form = document.getElementById("zap-form");
@@ -500,10 +500,6 @@
       }
     }
 
-    // Populate hidden fields
-    document.getElementById("source_page").value = window.location.href;
-    document.getElementById("submitted_at").value = new Date().toISOString();
-
     resetBtn.addEventListener("click", () => {
       form.reset();
       setStatus("", "Reset. Ready when you are.");
@@ -515,16 +511,17 @@
       setStatus("", "Submitting…");
       setLoading(true);
 
-      // Refresh timestamp each submit
-      document.getElementById("submitted_at").value = new Date().toISOString();
-
       const formData = new FormData(form);
 
       // Convert FormData -> plain object
       const payload = {};
-      for (const [key, value] of formData.entries()) {
-        payload[key] = value;
-      }
+      for (const [key, value] of formData.entries()) payload[key] = value;
+
+      // Force metadata every time (prevents empty payload / querystring weirdness)
+      payload.page_url = window.location.href;
+      payload.submitted_at = new Date().toISOString();
+      payload.form_type = "buyer_buy_box";
+      payload.mode = "json";
 
       try{
         const res = await fetch(ZAPIER_WEBHOOK_URL, {
