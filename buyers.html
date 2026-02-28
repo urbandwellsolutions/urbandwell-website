@@ -4,545 +4,125 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Buyer Network | Urban Dwell Solutions</title>
-  <meta name="description" content="Join Urban Dwell Solutions' RV Park Buyer Network. Submit your buy box to receive matching off-market RV park opportunities." />
-
-  <style>
-    :root{
-      --bg:#0b1220;
-      --card:#101a2d;
-      --card2:#0f1730;
-      --text:#e9eefc;
-      --muted:#a9b6d6;
-      --line:rgba(255,255,255,0.12);
-      --accent:#66e3ff;
-      --accent2:#7c5cff;
-      --ok:#59ffa0;
-      --danger:#ff6b6b;
-      --shadow: 0 18px 60px rgba(0,0,0,0.45);
-      --radius:18px;
-    }
-
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,0.28), transparent 60%),
-        radial-gradient(900px 500px at 80% 0%, rgba(102,227,255,0.22), transparent 55%),
-        var(--bg);
-      min-height:100vh;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-
-    .wrap{
-      width:min(1100px, 92vw);
-      margin: 28px auto 80px;
-    }
-
-    /* Header */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding: 16px 18px;
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,26,45,0.92), rgba(16,26,45,0.70));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 0;
-    }
-    .brand img{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      object-fit: cover;
-      background: rgba(255,255,255,0.06);
-    }
-    .brand .name{
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-      line-height:1.1;
-    }
-    .brand .name strong{
-      font-size: 14px;
-      letter-spacing: 0.35px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .brand .name span{
-      font-size: 12px;
-      color: var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .cta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-weight:700;
-      font-size: 13px;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(102,227,255,0.45); background: rgba(102,227,255,0.08); }
-    .btn.primary{
-      border-color: rgba(102,227,255,0.55);
-      background: linear-gradient(135deg, rgba(102,227,255,0.18), rgba(124,92,255,0.16));
-    }
-
-    /* Hero */
-    .hero{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 16px;
-      align-items:stretch;
-    }
-
-    .panel{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,26,45,0.85), rgba(15,23,48,0.62));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .hero-left{
-      padding: 22px 22px 18px;
-    }
-    .kicker{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255,255,255,0.05);
-    }
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background: var(--ok);
-      box-shadow: 0 0 0 4px rgba(89,255,160,0.10);
-    }
-    h1{
-      margin: 14px 0 10px;
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: 0.2px;
-      line-height: 1.1;
-    }
-    .sub{
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 60ch;
-      margin: 0 0 16px;
-    }
-
-    .bullets{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .bullet{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: rgba(255,255,255,0.04);
-    }
-    .bullet strong{
-      display:block;
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
-    .bullet span{
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* Form */
-    .hero-right{
-      padding: 18px;
-    }
-    .form-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom: 10px;
-    }
-    .form-head h2{
-      margin:0;
-      font-size: 16px;
-    }
-    .form-head p{
-      margin:6px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    form{
-      display:grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    label{
-      font-size: 12px;
-      color: var(--muted);
-      margin: 2px 0 6px;
-      display:block;
-    }
-
-    input, select, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      outline:none;
-      font-size: 14px;
-    }
-    textarea{ min-height: 92px; resize: vertical; }
-
-    input::placeholder, textarea::placeholder{ color: rgba(169,182,214,0.70); }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top: 6px;
-    }
-
-    .status{
-      flex: 1 1 auto;
-      font-size: 12px;
-      color: var(--muted);
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      min-height: 40px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .status.ok{ border-color: rgba(89,255,160,0.35); }
-    .status.bad{ border-color: rgba(255,107,107,0.40); }
-
-    .spinner{
-      width:14px; height:14px;
-      border-radius: 999px;
-      border: 2px solid rgba(255,255,255,0.25);
-      border-top-color: rgba(102,227,255,0.9);
-      animation: spin 0.8s linear infinite;
-      display:none;
-    }
-    .status.loading .spinner{ display:inline-block; }
-
-    @keyframes spin{ to{ transform: rotate(360deg); } }
-
-    .foot{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    /* Responsive */
-    @media (max-width: 880px){
-      .hero{ grid-template-columns: 1fr; }
-      .bullets{ grid-template-columns: 1fr; }
-      .row{ grid-template-columns: 1fr; }
-      .cta{ justify-content:flex-start; }
-    }
-  </style>
+  <meta name="description" content="Join the Urban Dwell Solutions Buyer Network. Submit your buy box to receive matching opportunities." />
+  <link rel="icon" href="logo-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <!-- Upload your logo as: logo-icon.png (same folder as this buyers page) -->
-        <img src="logo-icon.png" alt="Urban Dwell Solutions Logo" />
-        <div class="name">
-          <strong>Urban Dwell Solutions</strong>
-          <span>RV Park Buyer Network</span>
-        </div>
-      </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img src="logo-icon.png" alt="Urban Dwell Solutions" class="brand-logo" />
+        <span class="brand-name">Urban Dwell Solutions</span>
+      </a>
 
-      <div class="cta">
-        <a class="btn" href="./index.html">Home</a>
-        <a class="btn primary" href="#buybox">Join Buyer Network</a>
-      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="buyers.html" class="nav-link active">Buyer Network</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="hero">
-      <div class="panel hero-left">
-        <div class="kicker"><span class="dot"></span> Off-market RV park opportunities • Buyer matching</div>
-        <h1>Submit your buy box.<br/>Get matched to deals.</h1>
-        <p class="sub">
-          Tell us exactly what you’re looking for. When a deal fits your criteria, we’ll route it to you fast.
-          Clean process. Serious buyers only.
-        </p>
-
-        <div class="bullets">
-          <div class="bullet">
-            <strong>Targeted Matches</strong>
-            <span>We filter opportunities based on your size, states, returns, and strategy.</span>
-          </div>
-          <div class="bullet">
-            <strong>Fast Routing</strong>
-            <span>When something fits, we push it to your preferred contact method.</span>
-          </div>
-          <div class="bullet">
-            <strong>Buyer-Ready Intake</strong>
-            <span>LLC/entity, proof of funds notes, and timeline—captured upfront.</span>
-          </div>
-          <div class="bullet">
-            <strong>Operator Friendly</strong>
-            <span>From value-add to stabilized—tell us how you win and we’ll align deals.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel hero-right" id="buybox">
-        <div class="form-head">
-          <div>
-            <h2>Buyer Intake Form</h2>
-            <p>Fill this out once. Update anytime.</p>
-          </div>
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h1 class="page-title">Buyer Network</h1>
+          <p class="muted">
+            Submit your buy box. We’ll match you to off-market opportunities that fit your criteria.
+          </p>
         </div>
 
-        <form id="zap-form" autocomplete="on">
-          <div class="row">
-            <div>
-              <label for="full_name">Full Name</label>
-              <input id="full_name" name="full_name" type="text" placeholder="John Smith" required />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="you@company.com" required />
-            </div>
+        <div class="grid-2">
+          <div class="card">
+            <h2>Submit your details</h2>
+            <p class="muted">
+              This takes 60 seconds. Be as specific as possible so we can send the right deals.
+            </p>
+
+            <!-- IMPORTANT:
+                 - form id must be dealForm
+                 - name attributes must match buyers.js
+            -->
+            <form id="dealForm" class="form">
+              <div class="row">
+                <label>
+                  Full Name
+                  <input type="text" name="name" placeholder="Your name" autocomplete="name" required />
+                </label>
+
+                <label>
+                  Role
+                  <select name="role" required>
+                    <option value="" disabled selected>Select one</option>
+                    <option>Investor / Buyer</option>
+                    <option>Operator</option>
+                    <option>Broker</option>
+                    <option>Wholesaler</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="row">
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+                </label>
+
+                <label>
+                  Phone
+                  <input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
+                </label>
+              </div>
+
+              <label>
+                Buy Box / Criteria (states, lot count, price range, cash/terms, etc.)
+                <textarea name="summary" rows="6" placeholder="Example: Midwest/Southeast, 80–200 pads, value-add, willing to do terms, target cap range..." required></textarea>
+              </label>
+
+              <button class="btn primary full" type="submit" id="submitBtn">
+                Submit Buy Box
+              </button>
+
+              <p class="muted tiny">
+                By submitting, you agree we may contact you about matching opportunities.
+              </p>
+            </form>
           </div>
 
-          <div class="row">
-            <div>
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" />
-            </div>
-            <div>
-              <label for="contact_preference">Preferred Contact</label>
-              <select id="contact_preference" name="contact_preference">
-                <option value="Email">Email</option>
-                <option value="Text">Text</option>
-                <option value="Call">Call</option>
-              </select>
+          <div class="card">
+            <h2>What happens next</h2>
+            <ul class="bullets">
+              <li>We review your criteria.</li>
+              <li>We send deals that fit your buy box.</li>
+              <li>If a deal looks strong, we coordinate next steps quickly.</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h3 class="h3">Prefer email?</h3>
+            <p class="muted">
+              You can also email your buy box to
+              <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
+            </p>
+
+            <div class="status-box" id="statusBox" aria-live="polite">
+              <strong>Status:</strong>
+              <span class="muted" id="statusText">Ready to submit.</span>
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div>
-              <label for="buyer_type">Buyer Type</label>
-              <select id="buyer_type" name="buyer_type">
-                <option value="Operator">Operator</option>
-                <option value="Investor">Investor</option>
-                <option value="Syndicator">Syndicator</option>
-                <option value="Fund">Fund</option>
-                <option value="Broker">Broker</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label for="timeline">Acquisition Timeline</label>
-              <select id="timeline" name="timeline">
-                <option value="0-30 days">0–30 days</option>
-                <option value="1-3 months">1–3 months</option>
-                <option value="3-6 months">3–6 months</option>
-                <option value="6+ months">6+ months</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="min_price">Min Purchase Price ($)</label>
-              <input id="min_price" name="min_price" type="number" inputmode="numeric" placeholder="1000000" />
-            </div>
-            <div>
-              <label for="max_price">Max Purchase Price ($)</label>
-              <input id="max_price" name="max_price" type="number" inputmode="numeric" placeholder="10000000" />
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="min_units">Min Pads / Sites</label>
-              <input id="min_units" name="min_units" type="number" inputmode="numeric" placeholder="50" />
-            </div>
-            <div>
-              <label for="asset_type">Asset Type</label>
-              <select id="asset_type" name="asset_type">
-                <option value="RV Park">RV Park</option>
-                <option value="MH Park">MH Park</option>
-                <option value="RV + MH">RV + MH</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label for="target_states">Target States (comma separated)</label>
-            <input id="target_states" name="target_states" type="text" placeholder="TX, FL, GA, NC..." />
-          </div>
-
-          <div>
-            <label for="strategy">Strategy / Notes</label>
-            <textarea id="strategy" name="strategy" placeholder="Value-add, expansion, occupancy upside, utilities, management, etc."></textarea>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="proof_of_funds">Proof of Funds / Capital Notes</label>
-              <input id="proof_of_funds" name="proof_of_funds" type="text" placeholder="POF available, equity amount, lender, etc." />
-            </div>
-            <div>
-              <label for="entity_name">Entity / Company</label>
-              <input id="entity_name" name="entity_name" type="text" placeholder="ABC Investments LLC" />
-            </div>
-          </div>
-
-          <!-- Hard markers for Zapier filtering / debugging -->
-          <input type="hidden" name="form_type" value="buyer_buy_box" />
-          <input type="hidden" name="mode" value="json" />
-
-          <div class="actions">
-            <button class="btn primary" type="submit" id="submitBtn">Submit Buy Box</button>
-            <button class="btn" type="button" id="resetBtn">Reset</button>
-
-            <div id="zap-status" class="status" aria-live="polite">
-              <span class="spinner" aria-hidden="true"></span>
-              <span id="zap-status-text">Ready when you are.</span>
-            </div>
-          </div>
-
-          <div class="foot">
-            By submitting, you confirm you’re an active buyer and agree to be contacted by Urban Dwell Solutions.
-          </div>
-        </form>
+        <footer class="footer">
+          <span class="muted">© <span id="year"></span> Urban Dwell Solutions</span>
+        </footer>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <script>
-    // ✅ Zapier webhook (Buyer Zap)
-    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u06o7xe/";
-
-    const form = document.getElementById("zap-form");
-    const statusBox = document.getElementById("zap-status");
-    const statusText = document.getElementById("zap-status-text");
-    const submitBtn = document.getElementById("submitBtn");
-    const resetBtn = document.getElementById("resetBtn");
-
-    function setStatus(type, msg){
-      statusBox.classList.remove("ok", "bad", "loading");
-      if(type) statusBox.classList.add(type);
-      statusText.textContent = msg;
-    }
-
-    function setLoading(isLoading){
-      if(isLoading){
-        statusBox.classList.add("loading");
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = "0.7";
-        submitBtn.style.cursor = "not-allowed";
-      }else{
-        statusBox.classList.remove("loading");
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = "1";
-        submitBtn.style.cursor = "pointer";
-      }
-    }
-
-    resetBtn.addEventListener("click", () => {
-      form.reset();
-      setStatus("", "Reset. Ready when you are.");
-    });
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      setStatus("", "Submitting…");
-      setLoading(true);
-
-      const formData = new FormData(form);
-
-      // Convert FormData -> plain object
-      const payload = {};
-      for (const [key, value] of formData.entries()) payload[key] = value;
-
-      // Force metadata every time (prevents empty payload / querystring weirdness)
-      payload.page_url = window.location.href;
-      payload.submitted_at = new Date().toISOString();
-      payload.form_type = "buyer_buy_box";
-      payload.mode = "json";
-
-      try{
-        const res = await fetch(ZAPIER_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        if(!res.ok){
-          throw new Error("Zapier response not OK (" + res.status + ")");
-        }
-
-        setStatus("ok", "✅ Submitted! You're in the Buyer Network. We'll reach out if a match fits.");
-        form.reset();
-      }catch(err){
-        console.error(err);
-        setStatus("bad", "❌ Submission failed. Check the webhook + Zapier test trigger, then try again.");
-      }finally{
-        setLoading(false);
-      }
-    });
-  </script>
+  <!-- buyers page ONLY -->
+  <script src="buyers.js"></script>
 </body>
 </html>
