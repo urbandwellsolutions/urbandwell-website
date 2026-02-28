@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Urban Dwell Solutions | RV Park Acquisition & Deal Structuring</title>
   <meta name="description" content="Nationwide RV Park acquisition and deal structuring. Wholesalers. Brokers. Owners." />
 
@@ -16,158 +16,199 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Background glow -->
-  <div class="bg" aria-hidden="true">
-    <div class="bg__blob bg__blob--a"></div>
-    <div class="bg__blob bg__blob--b"></div>
-    <div class="bg__noise"></div>
+  <!-- Top glow background -->
+  <div class="bg">
+    <div class="bg__glow bg__glow--a"></div>
+    <div class="bg__glow bg__glow--b"></div>
+    <div class="bg__glow bg__glow--c"></div>
   </div>
 
   <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="Urban Dwell Solutions home">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__text">
-          <span class="brand__name">Urban Dwell Solutions</span>
-          <span class="brand__tag">RV Park Acquisition • Deal Structuring</span>
-        </span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="btn btn--ghost" href="buyers.html">Buyer Network</a>
-        <a class="btn btn--ghost" href="#submit">Submit a Deal</a>
-        <a class="btn btn--ghost" href="#brokers">Brokers</a>
-        <a class="btn btn--ghost" href="#wholesalers">Wholesalers</a>
-        <a class="btn btn--ghost" href="#process">Process</a>
-      </nav>
-
-      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <div class="mobileMenu" id="mobileMenu" hidden>
-      <div class="container mobileMenu__inner">
-        <a class="btn btn--ghost" href="buyers.html">Buyer Network</a>
-        <a class="btn btn--ghost" href="#submit">Submit a Deal</a>
-        <a class="btn btn--ghost" href="#brokers">Brokers</a>
-        <a class="btn btn--ghost" href="#wholesalers">Wholesalers</a>
-        <a class="btn btn--ghost" href="#process">Process</a>
+      <div class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <div class="brand__text">
+          <div class="brand__name">Urban Dwell Solutions</div>
+          <div class="brand__tag">RV Park Acquisition • Deal Structuring</div>
+        </div>
       </div>
+
+      <button class="menuBtn" id="menuBtn" aria-expanded="false" aria-controls="nav">
+        <span class="menuBtn__bar"></span>
+        <span class="menuBtn__bar"></span>
+        <span class="menuBtn__bar"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a class="pill" href="#buyers">Buyer Network</a>
+        <a class="pill pill--active" href="#deal">Submit a Deal</a>
+        <a class="pill" href="#brokers">Brokers</a>
+        <a class="pill" href="#wholesalers">Wholesalers</a>
+        <a class="pill" href="#process">Process</a>
+      </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <h1>Nationwide RV Park Acquisition &amp; Deal Structuring</h1>
-          <p class="lead">
-            Wholesalers. Brokers. Owners. Bring us mismanaged, underperforming, or creatively structured RV park opportunities.
-            If a deal doesn’t work cash — we structure it.
-          </p>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1>Nationwide RV Park Acquisition &amp; Deal Structuring</h1>
+            <p class="lead">
+              Wholesalers. Brokers. Owners. Bring us mismanaged, underperforming, or creatively structured RV park opportunities.
+              If a deal doesn’t work cash — we structure it.
+            </p>
 
-          <div class="pills" aria-label="Highlights">
-            <span class="pill">Value-Add RV Parks</span>
-            <span class="pill">Seller Finance / Hybrid</span>
-            <span class="pill">Broker-Friendly</span>
-            <span class="pill">48-Hour Review</span>
-          </div>
-
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#submit">Submit a Deal</a>
-            <a class="btn btn--soft" href="buyers.html">Join Buyer Network</a>
-            <a class="btn btn--soft" href="#process">How it works</a>
-          </div>
-
-          <div class="hero__fine">
-            Focused on operational turnarounds, clean underwriting, and win-win structures.
-          </div>
-        </div>
-
-        <div class="hero__card">
-          <div class="card">
-            <div class="card__top">
-              <div class="card__title">Quick Fit Check</div>
-              <div class="card__subtitle">Share basics. We’ll respond fast.</div>
+            <div class="chips" aria-label="Focus areas">
+              <span class="chip">Value-Add RV Parks</span>
+              <span class="chip">Seller Finance / Hybrid</span>
+              <span class="chip">Broker-Friendly</span>
+              <span class="chip">48-Hour Review</span>
             </div>
 
-            <ul class="checklist">
-              <li><span class="dot"></span> State / City + # of pads</li>
-              <li><span class="dot"></span> Current occupancy + rents</li>
-              <li><span class="dot"></span> Asking price / target</li>
-              <li><span class="dot"></span> Any seller finance terms</li>
-            </ul>
+            <div class="ctaRow">
+              <a class="btn btn--primary" href="#deal">Submit a Deal</a>
+              <a class="btn btn--ghost" href="#buyers">Join Buyer Network</a>
+              <a class="btn btn--subtle" href="#process">How it works</a>
+            </div>
 
-            <a class="btn btn--primary btn--full" href="#submit">Submit an RV Park Deal</a>
-            <div class="micro">This form submits securely via webhook. If you prefer email: <strong>Solutions@urbandwell.io</strong></div>
+            <div class="subnote">
+              Focused on operational turnarounds, clean underwriting, and win-win structures.
+            </div>
+
+            <div class="card quickfit">
+              <div class="card__title">Quick Fit Check</div>
+              <div class="card__sub">Share basics. We’ll respond fast.</div>
+              <ul class="bullets">
+                <li>State / City + # of pads</li>
+                <li>Current occupancy + rents</li>
+                <li>Asking price / target</li>
+                <li>Any seller finance terms</li>
+              </ul>
+
+              <div class="quickfit__action">
+                <a class="btn btn--wide" href="#deal">Submit an RV Park Deal</a>
+                <div class="quickfit__fine">
+                  This form submits securely via webhook. If you prefer email: <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right hero card -->
+          <div class="hero__panel">
+            <div class="panel card">
+              <div class="panel__headline">What we look for</div>
+              <div class="panel__grid">
+                <div class="kpi">
+                  <div class="kpi__label">Asset Type</div>
+                  <div class="kpi__value">RV Parks</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi__label">Review Window</div>
+                  <div class="kpi__value">48 Hours</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi__label">Preferred</div>
+                  <div class="kpi__value">Value-Add</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi__label">Structures</div>
+                  <div class="kpi__value">Creative</div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="panel__headline">Broker-friendly</div>
+              <p class="muted">
+                We’re underwriting-first and communication-tight. If it fits, we’ll ask for deeper docs and move toward
+                contract/close with clear next steps.
+              </p>
+
+              <div class="badgeRow">
+                <span class="badge">Seller finance</span>
+                <span class="badge">Assumable debt</span>
+                <span class="badge">Hybrid</span>
+                <span class="badge">Timeline clarity</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="submit">
+    <!-- SUBMIT DEAL -->
+    <section class="section" id="deal">
       <div class="container">
         <div class="section__head">
           <h2>Submit an RV Park Deal</h2>
           <p class="muted">We respond fast. Send what you have — rent roll / P&amp;L / OM preferred.</p>
         </div>
 
-        <div class="grid grid--2">
-          <form class="form card" id="dealForm" novalidate>
-            <div class="form__row">
-              <label>
-                <span>Name</span>
-                <input name="name" type="text" placeholder="Your name" autocomplete="name" required />
-              </label>
+        <div class="grid2">
+          <!-- form -->
+          <div class="card formCard">
+            <form id="dealForm" novalidate>
+              <div class="formGrid">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+                </div>
 
-              <label>
-                <span>I am a…</span>
-                <select name="role" required>
-                  <option value="" disabled selected>Select one</option>
-                  <option value="Wholesaler">Wholesaler</option>
-                  <option value="Broker">Broker</option>
-                  <option value="Owner">Owner</option>
-                  <option value="Other">Other</option>
-                </select>
-              </label>
-            </div>
+                <div class="field">
+                  <label for="role">I am a…</label>
+                  <select id="role" name="role" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option>Wholesaler</option>
+                    <option>Broker</option>
+                    <option>Owner / Operator</option>
+                    <option>Investor</option>
+                    <option>Other</option>
+                  </select>
+                </div>
 
-            <div class="form__row">
-              <label>
-                <span>Email</span>
-                <input name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
-              </label>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required>
+                </div>
 
-              <label>
-                <span>Phone</span>
-                <input name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel" />
-              </label>
-            </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+                </div>
 
-            <label>
-              <span>Deal Summary</span>
-              <textarea name="summary" rows="6" placeholder="State / City, # of pads, occupancy, rents, asking price, and any seller finance terms." required></textarea>
-            </label>
+                <div class="field field--full">
+                  <label for="summary">Deal Summary</label>
+                  <textarea id="summary" name="summary" rows="6"
+                    placeholder="State / City, # of pads, current occupancy, current rents, asking price, and any seller finance terms."
+                    required></textarea>
+                </div>
+              </div>
 
-            <!-- Status message (hidden until used) -->
-            <div class="status" id="dealStatus" style="display:none;"></div>
+              <div class="formActions">
+                <button class="btn btn--primary" type="submit" id="submitBtn">Send Deal</button>
+                <a class="btn btn--subtle" href="#process">How it works</a>
+              </div>
 
-            <div class="form__actions">
-              <button class="btn btn--primary" id="dealSubmitBtn" type="submit">Send Deal</button>
-              <a class="link" href="#process">How it works</a>
-            </div>
+              <div class="fine muted">
+                By submitting, you agree we may contact you about this deal. Prefer email? Send details to
+                <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
+              </div>
 
-            <div class="micro">
-              By submitting, you agree we may contact you about this deal. Prefer email? Send details to <strong>Solutions@urbandwell.io</strong>.
-            </div>
-          </form>
+              <div class="status" id="status" aria-live="polite"></div>
+            </form>
+          </div>
 
-          <div class="card card--info">
-            <h3>What helps us move fast</h3>
-            <div class="muted">If you have any of these, include them in the summary or attach via email:</div>
+          <!-- right info -->
+          <div class="card infoCard">
+            <div class="card__title">What helps us move fast</div>
+            <div class="card__sub">If you have any of these, include them in the summary or attach via email:</div>
 
-            <div class="infoGrid">
+            <div class="infoList">
               <div class="infoItem">
                 <div class="infoItem__k">Financials</div>
                 <div class="infoItem__v">T-12, P&amp;L, bank statements (if available)</div>
@@ -187,14 +228,15 @@
             </div>
 
             <div class="callout">
-              <div class="callout__title">48-hour review</div>
-              <div class="callout__text">If it fits, we’ll ask for deeper docs and move to underwriting.</div>
+              <div class="callout__k">48-hour review</div>
+              <div class="callout__v">If it fits, we’ll ask for deeper docs and move to underwriting.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- PROCESS -->
     <section class="section" id="process">
       <div class="container">
         <div class="section__head">
@@ -204,149 +246,65 @@
 
         <div class="steps">
           <div class="step card">
-            <div class="step__num">1</div>
-            <div class="step__body">
-              <h3>Submit</h3>
-              <p class="muted">Send the basics: location, pad count, occupancy, rents, price, and any creative terms.</p>
-            </div>
+            <div class="step__n">1</div>
+            <div class="step__t">Submit</div>
+            <div class="step__d">Send the basics: location, pad count, occupancy, rents, price, and any creative terms.</div>
           </div>
-
           <div class="step card">
-            <div class="step__num">2</div>
-            <div class="step__body">
-              <h3>Review</h3>
-              <p class="muted">We do a quick fit check and respond within 48 hours with next steps.</p>
-            </div>
+            <div class="step__n">2</div>
+            <div class="step__t">Review</div>
+            <div class="step__d">We do a quick fit check and respond within 48 hours with next steps.</div>
           </div>
-
           <div class="step card">
-            <div class="step__num">3</div>
-            <div class="step__body">
-              <h3>Structure</h3>
-              <p class="muted">If cash doesn’t pencil, we propose seller finance/hybrid structures that can.</p>
-            </div>
+            <div class="step__n">3</div>
+            <div class="step__t">Structure</div>
+            <div class="step__d">If cash doesn’t pencil, we propose seller finance/hybrid structures that can.</div>
           </div>
-
           <div class="step card">
-            <div class="step__num">4</div>
-            <div class="step__body">
-              <h3>Close</h3>
-              <p class="muted">Clean underwriting, tight communication, and a clear path to contract/close.</p>
-            </div>
+            <div class="step__n">4</div>
+            <div class="step__t">Close</div>
+            <div class="step__d">Clean underwriting, tight communication, and a clear path to contract/close.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Placeholder sections -->
+    <section class="section" id="buyers">
+      <div class="container">
+        <div class="card">
+          <div class="card__title">Buyer Network</div>
+          <div class="card__sub">This section can link to your dedicated Buyer Network page.</div>
+          <a class="btn btn--ghost" href="buyer-network.html">Go to Buyer Network</a>
         </div>
       </div>
     </section>
 
     <section class="section" id="brokers">
       <div class="container">
-        <div class="section__head">
-          <h2>Broker Partnership</h2>
-          <p class="muted">We protect relationships and move quickly with clear criteria.</p>
-        </div>
-
-        <div class="grid grid--3">
-          <div class="card">
-            <h3>Clear criteria</h3>
-            <p class="muted">Value-add parks, operational turnarounds, and opportunities with upside.</p>
-          </div>
-          <div class="card">
-            <h3>Fast feedback</h3>
-            <p class="muted">We’ll give a yes/no quickly and outline what we need to proceed.</p>
-          </div>
-          <div class="card">
-            <h3>Creative terms</h3>
-            <p class="muted">Seller finance, master lease options, assumption, and hybrid structures.</p>
-          </div>
+        <div class="card">
+          <div class="card__title">Brokers</div>
+          <div class="card__sub">Broker-friendly underwriting and quick feedback loops.</div>
         </div>
       </div>
     </section>
 
     <section class="section" id="wholesalers">
       <div class="container">
-        <div class="section__head">
-          <h2>Wholesalers</h2>
-          <p class="muted">Bring distressed or off-market. We’ll underwrite quickly and structure smart.</p>
-        </div>
-
-        <div class="grid grid--3">
-          <div class="card">
-            <h3>Off-market OK</h3>
-            <p class="muted">Even partial info works — send what you have and we’ll guide the rest.</p>
-          </div>
-          <div class="card">
-            <h3>Deal help</h3>
-            <p class="muted">We’ll help you tighten terms so it closes — not just “looks good”.</p>
-          </div>
-          <div class="card">
-            <h3>Repeatable</h3>
-            <p class="muted">If you source consistently, we’ll build a simple, repeatable flow.</p>
-          </div>
+        <div class="card">
+          <div class="card__title">Wholesalers</div>
+          <div class="card__sub">Bring us opportunities — we’ll help structure what doesn’t pencil cash.</div>
         </div>
       </div>
     </section>
 
-    <section class="section section--tight" id="problems">
-      <div class="container">
-        <div class="section__head">
-          <h2>Problems We Solve</h2>
-          <p class="muted">Common reasons a good RV park deal stalls — and how we fix it.</p>
-        </div>
-
-        <div class="grid grid--2">
-          <div class="card">
-            <h3>Owners</h3>
-            <ul class="bullets">
-              <li>Underperforming operations</li>
-              <li>Deferred maintenance / management gaps</li>
-              <li>Need speed + certainty</li>
-              <li>Prefer flexible terms (seller finance)</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Intermediaries</h3>
-            <ul class="bullets">
-              <li>Buyer needs structure to pencil</li>
-              <li>Docs incomplete / messy financials</li>
-              <li>Deal requires creative financing</li>
-              <li>Need fast underwriting response</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footerCTA card">
-          <div>
-            <div class="footerCTA__title">Have a deal?</div>
-            <div class="muted">Send it now — we’ll respond within 48 hours.</div>
-          </div>
-          <a class="btn btn--primary" href="#submit">Submit a Deal</a>
-        </div>
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">© <span id="year"></span> Urban Dwell Solutions</div>
+        <div class="muted">Email: <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a></div>
       </div>
-    </section>
+    </footer>
   </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__left">
-        <div class="brand brand--small">
-          <span class="brand__mark" aria-hidden="true"></span>
-          <span class="brand__text">
-            <span class="brand__name">Urban Dwell Solutions</span>
-            <span class="brand__tag">RV Park Acquisition • Deal Structuring</span>
-          </span>
-        </div>
-        <div class="micro">© <span id="year"></span> Urban Dwell Solutions. All rights reserved.</div>
-      </div>
-
-      <div class="footer__right">
-        <a class="link" href="#process">Process</a>
-        <a class="link" href="#brokers">Brokers</a>
-        <a class="link" href="#wholesalers">Wholesalers</a>
-        <a class="link" href="#submit">Submit</a>
-      </div>
-    </div>
-  </footer>
 
   <script src="script.js"></script>
 </body>
