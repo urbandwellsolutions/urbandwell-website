@@ -1,13 +1,51 @@
-/* main.js
-   - Handles Deal Form submission to Zapier webhook (CORS-safe)
-   - Adds UX: loading state, inline status messages, validation, anti-spam honeypot
+/* script.js
+   - Deal form -> Zapier webhook (CORS-safe)
+   - Mobile menu toggle
+   - Footer year
+   - UX: loading state, inline status, validation, honeypot
 */
 
 (() => {
   const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0oscvm/";
 
-  function $(sel, root = document) {
-    return root.querySelector(sel);
+  const $ = (sel, root = document) => root.querySelector(sel);
+
+  function setYear() {
+    const y = $("#year");
+    if (y) y.textContent = String(new Date().getFullYear());
+  }
+
+  function initMobileMenu() {
+    const btn = $(".hamburger");
+    const menu = $("#mobileMenu");
+    if (!btn || !menu) return;
+
+    const setState = (open) => {
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.hidden = !open;
+    };
+
+    // Toggle
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      setState(!isOpen);
+    });
+
+    // Close on nav click (mobile)
+    menu.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (a) setState(false);
+    });
+
+    // Close on ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setState(false);
+    });
+
+    // Close if resized to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 760) setState(false);
+    });
   }
 
   function setStatus(form, type, msg) {
@@ -36,7 +74,6 @@
   }
 
   function isValidEmail(email) {
-    // Simple + reliable enough for frontend
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
@@ -55,7 +92,7 @@
   }
 
   function buildPayload(form) {
-    const payload = {
+    return {
       name: getField(form, "name"),
       role: getField(form, "role"),
       email: getField(form, "email"),
@@ -64,31 +101,23 @@
       pageUrl: window.location.href,
       submittedAt: new Date().toISOString(),
     };
-
-    // Optional extra fields if you add them later
-    // payload.company = getField(form, "company");
-    // payload.state = getField(form, "state");
-
-    return payload;
   }
 
   function validate(payload) {
     const errors = [];
-
     if (!payload.name) errors.push("Please enter your name.");
     if (!payload.role) errors.push("Please select your role.");
     if (!payload.email) errors.push("Please enter your email.");
     if (payload.email && !isValidEmail(payload.email)) errors.push("Please enter a valid email.");
     if (!payload.summary) errors.push("Please add a short deal summary.");
-
     return errors;
   }
 
   async function sendToZapier(payload) {
-    // Zapier Catch Hook + browsers often require no-cors
     const fd = new FormData();
     Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
 
+    // CORS-safe: browser can send, but response is opaque.
     await fetch(WEBHOOK_URL, {
       method: "POST",
       mode: "no-cors",
@@ -96,12 +125,11 @@
     });
   }
 
-  function attachDealForm() {
-    const form = document.getElementById("dealForm");
+  function initDealForm() {
+    const form = $("#dealForm");
     if (!form) return;
 
-    // Add honeypot input if not present (anti-spam)
-    // Bots fill it, humans don't.
+    // Honeypot to block bots (hidden field)
     if (!form.querySelector('input[name="company_website"]')) {
       const hp = document.createElement("input");
       hp.type = "text";
@@ -114,7 +142,6 @@
     }
 
     const submitBtn = form.querySelector('button[type="submit"]');
-
     let inFlight = false;
 
     form.addEventListener("submit", async (e) => {
@@ -126,7 +153,6 @@
       // Honeypot check
       const hpVal = getField(form, "company_website");
       if (hpVal) {
-        // quietly pretend success to avoid tipping off bots
         form.reset();
         setStatus(form, "success", "✅ Thanks — received!");
         return;
@@ -158,10 +184,15 @@
     });
   }
 
-  // Safe init
+  function init() {
+    setYear();
+    initMobileMenu();
+    initDealForm();
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", attachDealForm);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    attachDealForm();
+    init();
   }
 })();
