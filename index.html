@@ -1,107 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Urban Dwell Solutions</title>
-  <meta name="description" content="Urban Dwell Solutions — RV park acquisitions, creative structuring, and buyer network." />
-  <link rel="icon" href="logo-icon.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Urban Dwell Solutions | Off-Market RV Park Deals</title>
+  <meta name="description" content="Urban Dwell Solutions connects serious buyers with off-market RV park opportunities and helps sellers explore creative, win-win exits." />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="logo-icon.png" alt="Urban Dwell Solutions" class="brand-logo" />
-        <span class="brand-name">Urban Dwell Solutions</span>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="./index.html" aria-label="Urban Dwell Solutions Home">
+        <div class="brand__mark" aria-hidden="true">B</div>
+        <div class="brand__text">
+          <div class="brand__name">Urban Dwell Solutions</div>
+          <div class="brand__sub">RV Park Acquisitions • Buyer Network</div>
+        </div>
       </a>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="buyers.html" class="nav-link">Buyer Network</a>
+      <button class="iconbtn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="nav" id="nav">
+        <a class="nav__link is-active" href="./index.html">Home</a>
+        <a class="nav__link" href="./buyers.html">Buyer Network</a>
+        <button class="btn btn--ghost nav__cta" id="openDealModal" type="button">Submit a Deal</button>
       </nav>
     </div>
   </header>
 
-  <main>
+  <!-- Hero -->
+  <main class="wrap">
     <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1>Off-market RV park opportunities, structured for real outcomes.</h1>
-          <p class="subtext">
-            We help connect sellers and investor partners through a simple, professional process —
-            including creative structuring when banks can’t make the deal work.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn primary" href="buyers.html">Join the Buyer Network</a>
-            <a class="btn ghost" href="#contact">Contact</a>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-item">• Investor-friendly structuring</div>
-            <div class="trust-item">• Fast, respectful outreach</div>
-            <div class="trust-item">• Clear next steps</div>
-          </div>
+      <div class="hero__left">
+        <div class="pill">
+          <span class="pill__dot"></span>
+          Off-market RV park opportunities • Serious buyers only
         </div>
 
-        <div class="hero-card">
-          <div class="card">
-            <h2>What we do</h2>
-            <ul class="bullets">
-              <li>Source and qualify RV park opportunities</li>
-              <li>Collect the details investors need to evaluate</li>
-              <li>Explore win-win structures (cash + terms, stabilization, etc.)</li>
-            </ul>
-            <div class="divider"></div>
-            <p class="muted">
-              Ready to receive deals? Join the Buyer Network and submit your buy box.
-            </p>
-            <a class="btn primary full" href="buyers.html">Buyer Network Form</a>
+        <h1 class="h1">
+          Match buyers to deals.<br />
+          Create win-win exits for sellers.
+        </h1>
+
+        <p class="lead">
+          We help RV park owners explore creative structuring and connect qualified buyers
+          to opportunities that fit their buy box—fast, clean, professional.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="./buyers.html">Join Buyer Network</a>
+          <button class="btn btn--ghost" id="openDealModal2" type="button">Submit a Deal</button>
+        </div>
+
+        <div class="trust">
+          <div class="trust__item">
+            <div class="trust__label">Deal Type</div>
+            <div class="trust__value">RV Parks • MH • Mixed</div>
+          </div>
+          <div class="trust__item">
+            <div class="trust__label">Focus</div>
+            <div class="trust__value">Off-Market • Value-Add</div>
+          </div>
+          <div class="trust__item">
+            <div class="trust__label">Approach</div>
+            <div class="trust__value">Creative Structuring</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__right">
+        <div class="card card--glow">
+          <h2 class="h2">How it works</h2>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step__num">1</div>
+              <div>
+                <div class="step__title">Buyers submit a buy box</div>
+                <div class="step__text">States, pad count, price range, strategy & timeline.</div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">2</div>
+              <div>
+                <div class="step__title">Deals get routed</div>
+                <div class="step__text">We route qualifying opportunities to the right buyers.</div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">3</div>
+              <div>
+                <div class="step__title">Win-win outcomes</div>
+                <div class="step__text">We explore creative exits that work for both sides.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <div class="note__title">Sellers & brokers:</div>
+            <div class="note__text">
+              Use “Submit a Deal” to send a property. We’ll reply quickly with next steps.
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p class="muted">Email us and we’ll respond quickly.</p>
-        </div>
-
-        <div class="card">
-          <div class="contact-grid">
-            <div>
-              <h3 class="h3">Business Email</h3>
-              <p class="muted">
-                <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>
-              </p>
-
-              <h3 class="h3">Buyer Network</h3>
-              <p class="muted">
-                If you want deals sent directly, fill out your buy box on the Buyer Network page.
-              </p>
-              <a class="btn ghost" href="buyers.html">Go to Buyer Network</a>
-            </div>
-
-            <div class="note">
-              <h3 class="h3">Tip</h3>
-              <p class="muted">
-                For the fastest response, include your acquisition criteria and preferred contact method (text/call/email).
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <footer class="footer">
-          <span class="muted">© <span id="year"></span> Urban Dwell Solutions</span>
-        </footer>
+    <!-- Feature Cards -->
+    <section class="grid3">
+      <div class="card">
+        <h3 class="h3">Buyer-Ready Intake</h3>
+        <p class="muted">Capture buy box criteria upfront so deals move faster with less friction.</p>
+      </div>
+      <div class="card">
+        <h3 class="h3">Institutional-Friendly</h3>
+        <p class="muted">We package details cleanly so investor partners can evaluate efficiently.</p>
+      </div>
+      <div class="card">
+        <h3 class="h3">Creative Structuring</h3>
+        <p class="muted">Flexible solutions when banks don’t fit the situation right now.</p>
       </div>
     </section>
+
+    <footer class="footer">
+      <div class="footer__left">
+        <div class="footer__brand">Urban Dwell Solutions</div>
+        <div class="footer__muted">Solutions@urbandwell.io</div>
+      </div>
+      <div class="footer__right">
+        <a class="footer__link" href="./buyers.html">Buyer Network</a>
+        <button class="footer__link btnlink" id="openDealModal3" type="button">Submit a Deal</button>
+      </div>
+    </footer>
   </main>
 
-  <script src="script.js"></script>
+  <!-- Submit a Deal Modal -->
+  <div class="modal" id="dealModal" aria-hidden="true">
+    <div class="modal__overlay" data-close="true"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="dealModalTitle">
+      <div class="modal__head">
+        <div>
+          <div class="modal__title" id="dealModalTitle">Submit a Deal</div>
+          <div class="modal__sub">Send property details (broker or seller). We’ll respond quickly.</div>
+        </div>
+        <button class="iconbtn" id="closeDealModal" aria-label="Close modal">✕</button>
+      </div>
+
+      <form id="dealForm" class="form" novalidate>
+        <div class="form__grid">
+          <div>
+            <label class="label">Your Name <span class="req">*</span></label>
+            <input class="input" name="name" placeholder="Name" required />
+          </div>
+
+          <div>
+            <label class="label">Email <span class="req">*</span></label>
+            <input class="input" name="email" type="email" placeholder="Email" required />
+          </div>
+
+          <div>
+            <label class="label">Phone</label>
+            <input class="input" name="phone" placeholder="Phone" />
+          </div>
+
+          <div>
+            <label class="label">Role</label>
+            <select class="input" name="role">
+              <option>Broker</option>
+              <option>Owner / Seller</option>
+              <option>Partner</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="span2">
+            <label class="label">Property Summary <span class="req">*</span></label>
+            <textarea class="input" name="summary" placeholder="Location, pads/sites, price guidance, occupancy, utilities, upside, any notes..." required></textarea>
+          </div>
+        </div>
+
+        <div class="form__actions">
+          <button class="btn btn--primary" id="dealSubmitBtn" type="submit">Send Deal</button>
+          <button class="btn btn--ghost" type="button" data-close="true">Cancel</button>
+        </div>
+
+        <div class="status" id="dealStatus" role="status" aria-live="polite"></div>
+        <div class="fineprint">
+          If the webhook blocks a browser response due to CORS, we still send it successfully and show a confirmation.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./script.js" defer></script>
 </body>
 </html>
