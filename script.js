@@ -1,141 +1,88 @@
 (() => {
-  // =========================
-  // CONFIG
-  // =========================
   const DEAL_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0oscvm/";
+  const qs = (s) => document.querySelector(s);
 
-  const qs = (s, root = document) => root.querySelector(s);
-
-  // =========================
-  // MOBILE MENU (matches your index.html)
-  // =========================
-  const hamburger = qs(".hamburger");
-  const mobileMenu = qs("#mobileMenu");
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener("click", () => {
-      const isOpen = hamburger.getAttribute("aria-expanded") === "true";
-      hamburger.setAttribute("aria-expanded", String(!isOpen));
-      mobileMenu.hidden = isOpen;
+  // Mobile nav
+  const menuBtn = qs("#menuBtn");
+  const nav = qs("#nav");
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", () => {
+      const open = nav.classList.toggle("nav--open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     });
 
-    // close menu after clicking any link
-    mobileMenu.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => {
-        hamburger.setAttribute("aria-expanded", "false");
-        mobileMenu.hidden = true;
-      });
-    });
-
-    // close if user taps outside (mobile friendly)
     document.addEventListener("click", (e) => {
-      if (mobileMenu.hidden) return;
-      const t = e.target;
-      if (hamburger.contains(t) || mobileMenu.contains(t)) return;
-      hamburger.setAttribute("aria-expanded", "false");
-      mobileMenu.hidden = true;
+      if (!nav.classList.contains("nav--open")) return;
+      if (nav.contains(e.target) || menuBtn.contains(e.target)) return;
+      nav.classList.remove("nav--open");
+      menuBtn.setAttribute("aria-expanded", "false");
     });
   }
 
-  // =========================
-  // FOOTER YEAR
-  // =========================
-  const yearEl = qs("#year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  // Footer year
+  const year = qs("#year");
+  if (year) year.textContent = new Date().getFullYear();
 
-  // =========================
-  // FORM SUBMIT -> ZAPIER WEBHOOK
-  // =========================
+  // Deal form submit
   const form = qs("#dealForm");
-  const status = qs("#dealStatus");
-  const submitBtn = qs("#dealSubmitBtn");
+  const statusEl = qs("#status");
+  const submitBtn = qs("#submitBtn");
+  if (!form) return;
 
-  const showStatus = (type, msg) => {
-    if (!status) return;
-    status.style.display = "block";
-    status.className = "status " + (type === "ok" ? "is-ok" : "is-err");
-    status.textContent = msg;
+  const setStatus = (msg, type = "info") => {
+    if (!statusEl) return;
+    statusEl.textContent = msg || "";
+    statusEl.style.color =
+      type === "ok" ? "var(--ok)" :
+      type === "bad" ? "var(--danger)" :
+      "var(--muted)";
   };
 
-  const hideStatus = () => {
-    if (!status) return;
-    status.style.display = "none";
-    status.className = "status";
-    status.textContent = "";
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const lock = (on) => {
-    if (!submitBtn) return;
-    submitBtn.disabled = on;
-    submitBtn.textContent = on ? "Sending…" : "Send Deal";
-  };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (form) {
-    // Make sure the form never tries to navigate anywhere
-    form.setAttribute("action", "#");
+    const payload = {
+      name: form.elements["name"]?.value?.trim() || "",
+      role: form.elements["role"]?.value?.trim() || "",
+      email: form.elements["email"]?.value?.trim() || "",
+      phone: form.elements["phone"]?.value?.trim() || "",
+      summary: form.elements["summary"]?.value?.trim() || "",
+      pageUrl: window.location.href,
+      submittedAt: new Date().toISOString(),
+      source: "home_submit_a_deal",
+    };
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      hideStatus();
+    if (!payload.name || !payload.role || !payload.email || !payload.summary) {
+      setStatus("Please fill out Name, Role, Email, and Deal Summary.", "bad");
+      return;
+    }
+    if (!validateEmail(payload.email)) {
+      setStatus("Please enter a valid email address.", "bad");
+      return;
+    }
 
-      const fd = new FormData(form);
-      const name = (fd.get("name") || "").toString().trim();
-      const role = (fd.get("role") || "").toString().trim();
-      const email = (fd.get("email") || "").toString().trim();
-      const phone = (fd.get("phone") || "").toString().trim();
-      const summary = (fd.get("summary") || "").toString().trim();
+    try {
+      if (submitBtn) submitBtn.disabled = true;
+      setStatus("Sending…");
 
-      if (!name || !role || !email || !summary) {
-        showStatus("err", "Please complete Name, Role, Email, and Deal Summary.");
-        return;
-      }
+      const fd = new FormData();
+      Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
 
-      const payload = {
-        name,
-        role,
-        email,
-        phone,
-        summary,
-        pageUrl: window.location.href,
-        submittedAt: new Date().toISOString(),
-        source: "home_submit_a_deal"
-      };
+      await fetch(DEAL_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: fd,
+      });
 
-      lock(true);
-      showStatus("ok", "Sending your deal…");
-
-      try {
-        // Primary attempt (best case)
-        const res = await fetch(DEAL_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        if (!res.ok) throw new Error(`Webhook failed: ${res.status}`);
-
-        showStatus("ok", "✅ Deal submitted. We’ll respond quickly.");
-        form.reset();
-
-      } catch (err) {
-        // Fallback: some browsers block reading response due to CORS; still sends
-        try {
-          await fetch(DEAL_WEBHOOK_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-
-          showStatus("ok", "✅ Deal submitted. (Browser can’t verify due to CORS, but it was sent.)");
-          form.reset();
-        } catch (err2) {
-          console.error(err, err2);
-          showStatus("err", "Submit failed. Please try again or email Solutions@urbandwell.io.");
-        }
-      } finally {
-        lock(false);
-      }
-    });
-  }
+      setStatus("Sent! If it fits, we’ll respond within 48 hours.", "ok");
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      setStatus("Something went wrong. Please email Solutions@urbandwell.io.", "bad");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
 })();
