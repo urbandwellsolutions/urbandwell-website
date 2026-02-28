@@ -1,128 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Buyer Network | Urban Dwell Solutions</title>
-  <meta name="description" content="Join the Urban Dwell Solutions Buyer Network. Submit your buy box to receive matching opportunities." />
-  <link rel="icon" href="logo-icon.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Join the Urban Dwell Solutions Buyer Network. Submit your buy box to receive matching RV park opportunities." />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="logo-icon.png" alt="Urban Dwell Solutions" class="brand-logo" />
-        <span class="brand-name">Urban Dwell Solutions</span>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="./index.html" aria-label="Urban Dwell Solutions Home">
+        <div class="brand__mark" aria-hidden="true">B</div>
+        <div class="brand__text">
+          <div class="brand__name">Urban Dwell Solutions</div>
+          <div class="brand__sub">Buyer Network</div>
+        </div>
       </a>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="buyers.html" class="nav-link active">Buyer Network</a>
+      <button class="iconbtn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="nav" id="nav">
+        <a class="nav__link" href="./index.html">Home</a>
+        <a class="nav__link is-active" href="./buyers.html">Buyer Network</a>
+        <a class="btn btn--ghost nav__cta" href="./index.html#submit">Submit a Deal</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h1 class="page-title">Buyer Network</h1>
-          <p class="muted">
-            Submit your buy box. We’ll match you to off-market opportunities that fit your criteria.
-          </p>
+  <main class="wrap">
+    <section class="pagehead">
+      <div class="pill">
+        <span class="pill__dot"></span>
+        Submit your buy box • Update anytime
+      </div>
+
+      <h1 class="h1">Buyer Intake</h1>
+      <p class="lead">
+        Tell us what you’re looking for. When an opportunity matches your criteria,
+        we’ll route it to you fast.
+      </p>
+    </section>
+
+    <section class="twoCol">
+      <div class="card">
+        <h2 class="h2">What you get</h2>
+
+        <div class="list">
+          <div class="list__item">
+            <div class="list__title">Targeted matches</div>
+            <div class="list__text">We filter based on states, pads, price, strategy, and timeline.</div>
+          </div>
+          <div class="list__item">
+            <div class="list__title">Clean deal packaging</div>
+            <div class="list__text">Buyer-ready summaries for faster investor evaluation.</div>
+          </div>
+          <div class="list__item">
+            <div class="list__title">Serious-only routing</div>
+            <div class="list__text">We prioritize responsive, qualified buyers.</div>
+          </div>
         </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <h2>Submit your details</h2>
-            <p class="muted">
-              This takes 60 seconds. Be as specific as possible so we can send the right deals.
-            </p>
+        <div class="note">
+          <div class="note__title">Tip:</div>
+          <div class="note__text">Be specific—your buy box = faster matches.</div>
+        </div>
+      </div>
 
-            <!-- IMPORTANT:
-                 - form id must be dealForm
-                 - name attributes must match buyers.js
-            -->
-            <form id="dealForm" class="form">
-              <div class="row">
-                <label>
-                  Full Name
-                  <input type="text" name="name" placeholder="Your name" autocomplete="name" required />
-                </label>
+      <div class="card card--glow">
+        <h2 class="h2">Buyer Intake Form</h2>
+        <p class="muted">Required fields are marked. We save your draft automatically.</p>
 
-                <label>
-                  Role
-                  <select name="role" required>
-                    <option value="" disabled selected>Select one</option>
-                    <option>Investor / Buyer</option>
-                    <option>Operator</option>
-                    <option>Broker</option>
-                    <option>Wholesaler</option>
-                    <option>Other</option>
-                  </select>
-                </label>
-              </div>
+        <form id="buyerForm" class="form" novalidate>
+          <div class="form__grid">
+            <div>
+              <label class="label">Full Name <span class="req">*</span></label>
+              <input class="input" name="fullName" autocomplete="name" required />
+            </div>
 
-              <div class="row">
-                <label>
-                  Email
-                  <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-                </label>
+            <div>
+              <label class="label">Email <span class="req">*</span></label>
+              <input class="input" name="email" type="email" autocomplete="email" required />
+            </div>
 
-                <label>
-                  Phone
-                  <input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
-                </label>
-              </div>
+            <div>
+              <label class="label">Phone</label>
+              <input class="input" name="phone" autocomplete="tel" />
+            </div>
 
-              <label>
-                Buy Box / Criteria (states, lot count, price range, cash/terms, etc.)
-                <textarea name="summary" rows="6" placeholder="Example: Midwest/Southeast, 80–200 pads, value-add, willing to do terms, target cap range..." required></textarea>
-              </label>
+            <div>
+              <label class="label">Preferred Contact</label>
+              <select class="input" name="preferredContact">
+                <option>Text</option>
+                <option>Call</option>
+                <option>Email</option>
+              </select>
+            </div>
 
-              <button class="btn primary full" type="submit" id="submitBtn">
-                Submit Buy Box
-              </button>
+            <div>
+              <label class="label">Buyer Type</label>
+              <select class="input" name="buyerType">
+                <option>Operator</option>
+                <option>Syndicator</option>
+                <option>Family Office</option>
+                <option>Institutional</option>
+                <option>Broker / Dealer</option>
+                <option>Other</option>
+              </select>
+            </div>
 
-              <p class="muted tiny">
-                By submitting, you agree we may contact you about matching opportunities.
-              </p>
-            </form>
-          </div>
+            <div>
+              <label class="label">Acquisition Timeline</label>
+              <select class="input" name="timeline">
+                <option>ASAP</option>
+                <option>0–3 months</option>
+                <option selected>3–6 months</option>
+                <option>6–12 months</option>
+                <option>12+ months</option>
+              </select>
+            </div>
 
-          <div class="card">
-            <h2>What happens next</h2>
-            <ul class="bullets">
-              <li>We review your criteria.</li>
-              <li>We send deals that fit your buy box.</li>
-              <li>If a deal looks strong, we coordinate next steps quickly.</li>
-            </ul>
+            <div>
+              <label class="label">Min Purchase Price ($)</label>
+              <input class="input" name="minPrice" inputmode="numeric" placeholder="1000000" />
+            </div>
 
-            <div class="divider"></div>
+            <div>
+              <label class="label">Max Purchase Price ($)</label>
+              <input class="input" name="maxPrice" inputmode="numeric" placeholder="10000000" />
+            </div>
 
-            <h3 class="h3">Prefer email?</h3>
-            <p class="muted">
-              You can also email your buy box to
-              <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
-            </p>
+            <div>
+              <label class="label">Min Pads / Sites</label>
+              <input class="input" name="minPads" inputmode="numeric" placeholder="50" />
+            </div>
 
-            <div class="status-box" id="statusBox" aria-live="polite">
-              <strong>Status:</strong>
-              <span class="muted" id="statusText">Ready to submit.</span>
+            <div>
+              <label class="label">Asset Type</label>
+              <select class="input" name="assetType">
+                <option selected>RV Park</option>
+                <option>MH Park</option>
+                <option>RV + MH Mixed</option>
+                <option>Campground</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="span2">
+              <label class="label">Target States (comma separated)</label>
+              <input class="input" name="targetStates" placeholder="TX, FL, GA, NC..." />
+            </div>
+
+            <div class="span2">
+              <label class="label">Strategy / Notes</label>
+              <textarea class="input" name="strategyNotes" placeholder="Value-add, expansion, utilities, management, occupancy upside..."></textarea>
+            </div>
+
+            <div>
+              <label class="label">Proof of Funds / Capital Notes</label>
+              <input class="input" name="pofNotes" placeholder="POF available, equity amount, lender..." />
+            </div>
+
+            <div>
+              <label class="label">Entity / Company</label>
+              <input class="input" name="entityCompany" placeholder="ABC Investments LLC" />
             </div>
           </div>
-        </div>
 
-        <footer class="footer">
-          <span class="muted">© <span id="year"></span> Urban Dwell Solutions</span>
-        </footer>
+          <div class="form__actions">
+            <button class="btn btn--primary" id="buyerSubmitBtn" type="submit">Submit Buy Box</button>
+            <button class="btn btn--ghost" id="buyerResetBtn" type="button">Reset</button>
+          </div>
+
+          <div class="status" id="buyerStatus" role="status" aria-live="polite"></div>
+          <div class="fineprint">
+            This form submits to Zapier via webhook. If your browser blocks reading the response due to CORS,
+            we still send it successfully and show a confirmation.
+          </div>
+        </form>
       </div>
     </section>
+
+    <footer class="footer">
+      <div class="footer__left">
+        <div class="footer__brand">Urban Dwell Solutions</div>
+        <div class="footer__muted">Solutions@urbandwell.io</div>
+      </div>
+      <div class="footer__right">
+        <a class="footer__link" href="./index.html">Home</a>
+      </div>
+    </footer>
   </main>
 
-  <!-- buyers page ONLY -->
-  <script src="buyers.js"></script>
+  <!-- Shared JS for nav -->
+  <script>
+    (() => {
+      const menuBtn = document.getElementById("menuBtn");
+      const nav = document.getElementById("nav");
+      if (!menuBtn || !nav) return;
+
+      menuBtn.addEventListener("click", () => {
+        const open = nav.classList.toggle("nav--open");
+        menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!nav.classList.contains("nav--open")) return;
+        if (nav.contains(e.target) || menuBtn.contains(e.target)) return;
+        nav.classList.remove("nav--open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    })();
+  </script>
+
+  <script src="./buyers.js" defer></script>
 </body>
 </html>
