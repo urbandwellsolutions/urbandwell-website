@@ -34,12 +34,38 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
   }
 
-  // Bottom nav "active" (auto)
+  // Bottom nav active state (page-based default)
   const page = document.body.getAttribute("data-page") || "";
-  document.querySelectorAll(".bottom-nav__item").forEach(a => a.classList.remove("is-active"));
-  if (page === "buyers") {
-    document.querySelector('.bottom-nav__item[data-nav="buyers"]')?.classList.add("is-active");
-  } else {
-    document.querySelector('.bottom-nav__item[data-nav="home"]')?.classList.add("is-active");
+  const allBottom = document.querySelectorAll(".bottom-nav__item");
+  allBottom.forEach(a => a.classList.remove("is-active"));
+
+  const setActive = (key) => {
+    allBottom.forEach(a => a.classList.remove("is-active"));
+    document.querySelector(`.bottom-nav__item[data-nav="${key}"]`)?.classList.add("is-active");
+  };
+
+  if (page === "buyers") setActive("buyers");
+  else setActive("home");
+
+  // Premium: highlight Submit when #submit is in view (home only)
+  if (page === "home") {
+    const submitEl = document.getElementById("submit");
+    if (submitEl && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const inView = entries.some(e => e.isIntersecting);
+          setActive(inView ? "submit" : "home");
+        },
+        { threshold: 0.35 }
+      );
+      io.observe(submitEl);
+    }
   }
+
+  // Premium: close drawer after tapping a drawer link
+  drawer?.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    close();
+  });
 })();
