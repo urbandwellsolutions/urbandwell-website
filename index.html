@@ -1,244 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Urban Dwell Solutions | RV Park Acquisition</title>
-  <meta name="description" content="Nationwide RV park acquisition and deal structuring. Wholesalers, brokers, and owners: bring us mismanaged or value-add RV park opportunities." />
-
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel:#0f1a33;
-      --text:#eaf0ff;
-      --muted:#b8c4e6;
-      --line: rgba(255,255,255,.12);
-      --accent:#6aa6ff;
-      --accent2:#46e6b0;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --max: 1080px;
-      --ok:#59ffa0;
-      --danger:#ff6b6b;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(106,166,255,.18), transparent 60%),
-                  radial-gradient(1000px 500px at 80% 10%, rgba(70,230,176,.12), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.55;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding: 22px 16px 70px;}
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding: 12px 0 18px;
-      position: sticky; top:0;
-      backdrop-filter: blur(10px);
-      background: rgba(11,18,32,.72);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      z-index: 50;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.3px;
-    }
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(106,166,255,.95), rgba(70,230,176,.85));
-      box-shadow: var(--shadow);
-      flex: 0 0 auto;
-    }
-    .nav{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
-    .nav a{
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius: 12px;
-      color:var(--muted);
-      background: rgba(255,255,255,.03);
-      font-size: 13px;
-      font-weight: 650;
-    }
-    .nav a:hover{border-color: rgba(106,166,255,.5); color: var(--text)}
-    .nav a.primary{
-      border-color: rgba(106,166,255,.6);
-      background: linear-gradient(135deg, rgba(106,166,255,.92), rgba(70,230,176,.72));
-      color:#07101f;
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns: 1.25fr .9fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top: 10px;
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-    .hero h1{
-      margin:0 0 10px;
-      font-size: clamp(28px, 4.2vw, 46px);
-      line-height:1.08;
-      letter-spacing: -.6px;
-    }
-    .hero p{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size: 16px;
-      max-width: 62ch;
-    }
-    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin: 12px 0 18px;}
-    .pill{
-      padding:8px 10px;
-      border:1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.03);
-      font-size: 13px;
-    }
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 750;
-      min-width: 150px;
-      cursor:pointer;
-      transition: transform .12s ease;
-    }
-    .btn.primary{
-      border-color: rgba(106,166,255,.6);
-      background: linear-gradient(135deg, rgba(106,166,255,.92), rgba(70,230,176,.72));
-      color:#07101f;
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .fine{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    form label{display:block; font-size:13px; color:var(--muted); margin: 10px 0 6px;}
-    input, textarea, select{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-      font-family: inherit;
-    }
-    textarea{min-height: 120px; resize: vertical;}
-    input:focus, textarea:focus, select:focus{border-color: rgba(106,166,255,.65)}
-    .formgrid{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
-    .formactions{margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap;}
-    .note{
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .status{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      display: none;
-      font-size: 13px;
-    }
-    .status.ok{ border-color: rgba(70,230,176,.35); color: var(--ok); }
-    .status.err{ border-color: rgba(255,107,107,.35); color: var(--danger); }
-
-    .section{margin-top: 18px; scroll-margin-top: 90px;}
-    .section h2{
-      margin: 0 0 12px;
-      font-size: 22px;
-      letter-spacing: -.2px;
-    }
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .grid2{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .mini h3{margin: 0 0 8px; font-size: 16px;}
-    .mini ul{margin:0; padding-left: 18px; color: var(--muted)}
-    .mini li{margin: 6px 0}
-    .step{
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .step b{display:block; margin-bottom:6px;}
-
-    footer{
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-    }
-
-    @media (max-width: 900px){
-      header{position: static; backdrop-filter: none;}
-      .hero{grid-template-columns: 1fr;}
-      .grid3{grid-template-columns: 1fr;}
-      .grid2{grid-template-columns: 1fr;}
-      .formgrid{grid-template-columns: 1fr;}
-      .nav{justify-content:flex-start}
-      .btn{min-width: 0;}
-    }
-  </style>
+  <meta name="description" content="Nationwide RV park acquisition and deal structuring. Wholesalers, brokers, and owners: bring value-add RV park opportunities." />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
-<body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <div style="font-size:16px;">Urban Dwell Solutions</div>
-          <div style="font-size:12px; color: var(--muted);">RV Park Acquisition • Deal Structuring</div>
-        </div>
+<body data-page="home">
+  <!-- Topbar -->
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Urban Dwell Solutions Home">
+      <img src="logo-icon.png" alt="Urban Dwell Solutions" class="brand__logo" />
+      <div class="brand__text">
+        <div class="brand__name">Urban Dwell Solutions</div>
+        <div class="brand__tag">RV Park Acquisition • Deal Structuring</div>
       </div>
+    </a>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="primary" href="#submit">Submit a Deal</a>
-        <a href="#brokers">Brokers</a>
-        <a href="#wholesalers">Wholesalers</a>
-        <a href="#process">Process</a>
-        <a href="#buyers">Buyer Network</a>
+    <div class="topbar__right">
+      <nav class="topnav topnav--desktop" aria-label="Primary">
+        <a class="topnav__link topnav__link--primary" href="#submit">Submit a Deal</a>
+        <a class="topnav__link" href="#brokers">Brokers</a>
+        <a class="topnav__link" href="#wholesalers">Wholesalers</a>
+        <a class="topnav__link" href="#process">Process</a>
+        <a class="topnav__link" href="buyers.html">Buyer Network</a>
       </nav>
-    </header>
 
-    <main>
+      <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <span class="icon-btn__bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Drawer overlay -->
+  <div class="drawer-overlay" id="drawerOverlay" hidden></div>
+
+  <!-- Slide-out Drawer -->
+  <aside class="drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer__head">
+      <div class="drawer__title">Menu</div>
+      <button class="icon-btn icon-btn--close" id="drawerClose" aria-label="Close menu">✕</button>
+    </div>
+
+    <nav class="drawer__nav">
+      <a class="drawer__link drawer__link--primary" href="#submit">Submit a Deal</a>
+      <a class="drawer__link" href="#brokers">Brokers</a>
+      <a class="drawer__link" href="#wholesalers">Wholesalers</a>
+      <a class="drawer__link" href="#process">Process</a>
+      <a class="drawer__link" href="buyers.html">Buyer Network</a>
+
+      <div class="drawer__meta">
+        <div class="drawer__metaLabel">Email</div>
+        <a class="drawer__metaValue" href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="page">
+    <div class="container">
       <section class="hero" id="top">
         <div class="card">
-          <h1>Nationwide RV Park Acquisition &amp; Deal Structuring</h1>
-          <p>
-            Wholesalers. Brokers. Owners. Bring us mismanaged, underperforming, or creatively structured
-            RV park opportunities. If a deal doesn’t work cash — we structure it.
+          <h1 class="h1">Nationwide RV Park Acquisition &amp; Deal Structuring</h1>
+          <p class="lead">
+            Wholesalers. Brokers. Owners. Bring us mismanaged, underperforming, or creatively structured RV park opportunities.
+            If a deal doesn’t work cash — we structure it.
           </p>
 
           <div class="pillrow">
@@ -252,29 +79,26 @@
             <a class="btn primary" href="#submit">Submit a Deal</a>
             <a class="btn" href="#brokers">Broker Partnership</a>
             <a class="btn" href="#wholesalers">Wholesale / JV</a>
-            <a class="btn" href="#buyers">Join Buyer Network</a>
+            <a class="btn" href="buyers.html">Join Buyer Network</a>
           </div>
 
-          <div class="fine">
+          <p class="muted small" style="margin-top:12px;">
             Focused on operational turnarounds, clean underwriting, and getting deals to the finish line.
-          </div>
+          </p>
         </div>
 
         <div class="card" id="submit">
-          <h2 style="margin:0 0 8px; font-size:20px;">Submit an RV Park Deal</h2>
-          <div style="color:var(--muted); font-size:13px; margin-bottom:10px;">
-            We respond fast. Send what you have — rent roll / P&amp;L / OM preferred.
-          </div>
+          <h2 class="h2">Submit an RV Park Deal</h2>
+          <p class="muted small">We respond fast. Send what you have — rent roll / P&amp;L / OM preferred.</p>
 
-          <!-- CONNECTED FORM -->
           <form id="dealForm" novalidate>
-            <div class="formgrid">
+            <div class="grid formgrid">
               <div>
-                <label for="name">Name <span style="color:var(--danger)">*</span></label>
+                <label for="name">Name <span class="req">*</span></label>
                 <input id="name" name="name" placeholder="Your name" required />
               </div>
               <div>
-                <label for="role">I am a... <span style="color:var(--danger)">*</span></label>
+                <label for="role">I am a… <span class="req">*</span></label>
                 <select id="role" name="role" required>
                   <option value="" selected disabled>Select one</option>
                   <option>Wholesaler</option>
@@ -284,81 +108,43 @@
                   <option>Other</option>
                 </select>
               </div>
-            </div>
 
-            <div class="formgrid">
               <div>
-                <label for="email">Email <span style="color:var(--danger)">*</span></label>
+                <label for="email">Email <span class="req">*</span></label>
                 <input id="email" name="email" type="email" placeholder="you@email.com" required />
               </div>
               <div>
                 <label for="phone">Phone</label>
                 <input id="phone" name="phone" placeholder="(555) 555-5555" />
               </div>
+
+              <div class="span2">
+                <label for="summary">Deal Summary <span class="req">*</span></label>
+                <textarea id="summary" name="summary" placeholder="State/City, pads, occupancy, rents, asking price or terms, seller finance terms..." required></textarea>
+              </div>
             </div>
 
-            <label for="summary">Deal Summary <span style="color:var(--danger)">*</span></label>
-            <textarea id="summary" name="summary" placeholder="State / City, # of pads, current occupancy, rents, asking price or terms, and any seller finance terms..." required></textarea>
-
-            <div class="formactions">
+            <div class="btnrow">
               <button class="btn primary" id="submitBtn" type="submit">Send Deal</button>
               <a class="btn" href="#process">How it works</a>
             </div>
 
             <div class="status" id="dealStatus" aria-live="polite"></div>
 
-            <div class="note">
+            <div class="note" style="margin-top:10px;">
               Prefer email? Send details to <a href="mailto:Solutions@urbandwell.io">Solutions@urbandwell.io</a>.
             </div>
           </form>
         </div>
       </section>
 
-      <section class="section">
-        <div class="card">
-          <h2>Problems We Solve</h2>
-          <div class="grid3">
-            <div class="mini">
-              <h3>Owners</h3>
-              <ul>
-                <li>Retiring / tired of management</li>
-                <li>Messy bookkeeping</li>
-                <li>Low occupancy</li>
-                <li>Deferred maintenance</li>
-                <li>Need flexible exit options</li>
-              </ul>
-            </div>
-            <div class="mini">
-              <h3>Brokers</h3>
-              <ul>
-                <li>Seller wants unrealistic pricing</li>
-                <li>Creative terms needed</li>
-                <li>Deal stuck due to financing</li>
-                <li>Buyer pool too small</li>
-                <li>Need consistent follow-up</li>
-              </ul>
-            </div>
-            <div class="mini">
-              <h3>Wholesalers</h3>
-              <ul>
-                <li>Can’t hit MAO</li>
-                <li>Seller owes too much</li>
-                <li>Creative lead — no capital partner</li>
-                <li>Dead leads sitting in CRM</li>
-                <li>Need a JV exit</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="section" id="process">
         <div class="card">
-          <h2>Our Process</h2>
+          <h2 class="h2">Our Process</h2>
           <div class="grid3">
             <div class="step">
               <b>Step 1 — Submit the Deal</b>
-              Send rent roll, P&amp;L, OM, or seller terms (if creative). If it’s messy, send what you have.
+              Send rent roll, P&amp;L, OM, or seller terms. If it’s messy, send what you have.
             </div>
             <div class="step">
               <b>Step 2 — Underwrite in 48 Hours</b>
@@ -374,46 +160,20 @@
 
       <section class="section" id="wholesalers">
         <div class="card">
-          <h2>Wholesalers — Revive Dead Leads</h2>
-          <p style="color:var(--muted); margin:0 0 10px;">
-            Can’t hit your MAO? If the seller owes too much, wants creative terms, or the deal needs structure —
-            send it. We can JV and get it done.
-          </p>
-          <div class="grid2">
-            <div class="step">
-              <b>What to send</b>
-              State/City, pad count, occupancy/rents, asking price or terms, what’s broken, and seller motivation.
-            </div>
-            <div class="step">
-              <b>JV options</b>
-              We can structure seller finance/hybrid terms and route to the right buyer pool to close.
-            </div>
-          </div>
-          <div class="btnrow" style="margin-top:12px;">
+          <h2 class="h2">Wholesalers — Revive Dead Leads</h2>
+          <p class="muted">Can’t hit MAO? If the deal needs structure — send it. We can JV and get it done.</p>
+          <div class="btnrow">
             <a class="btn primary" href="#submit">Send a Dead Lead</a>
-            <a class="btn" href="#buyers">Join Buyer Network</a>
+            <a class="btn" href="buyers.html">Join Buyer Network</a>
           </div>
         </div>
       </section>
 
       <section class="section" id="brokers">
         <div class="card">
-          <h2>Brokers — Creative Sellers Welcome</h2>
-          <p style="color:var(--muted); margin:0 0 10px;">
-            We respect commissions, move fast, and follow up consistently. Bring us value-add RV parks,
-            mom-and-pop operators, retiring owners, and mismanaged assets.
-          </p>
-          <div class="grid2">
-            <div class="step">
-              <b>Broker-Friendly</b>
-              Clear underwriting notes, fast feedback, and communication that helps you keep control of the relationship.
-            </div>
-            <div class="step">
-              <b>Creative Execution</b>
-              If the deal needs seller finance, hybrid, or other terms to pencil — we structure it.
-            </div>
-          </div>
-          <div class="btnrow" style="margin-top:12px;">
+          <h2 class="h2">Brokers — Creative Sellers Welcome</h2>
+          <p class="muted">We respect commissions, move fast, and follow up consistently.</p>
+          <div class="btnrow">
             <a class="btn primary" href="#submit">Send a Listing</a>
             <a class="btn" href="#process">See Process</a>
           </div>
@@ -422,102 +182,40 @@
 
       <section class="section" id="buyers">
         <div class="card">
-          <h2>Buyer Network</h2>
-          <p style="color:var(--muted); margin:0 0 10px;">
-            We match real opportunities to serious buyers focused on RV parks and campgrounds.
-            If you’re an active buyer, join the network and keep your buy box current.
-          </p>
+          <h2 class="h2">Buyer Network</h2>
+          <p class="muted">We match real opportunities to serious buyers focused on RV parks and campgrounds.</p>
           <div class="btnrow">
-            <!-- If your buyers page is buyers.html, keep this -->
             <a class="btn primary" href="buyers.html">Open Buyer Intake</a>
             <a class="btn" href="#submit">Send a Deal</a>
           </div>
         </div>
       </section>
 
-      <footer>
+      <footer class="footer">
         <div>© <span id="yr"></span> Urban Dwell Solutions</div>
         <div>Nationwide • RV Parks • Value-Add • Creative Terms</div>
       </footer>
-    </main>
-  </div>
+    </div>
+  </main>
 
-  <script>
-    // ✅ Update year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+  <!-- Sticky Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <a class="bottom-nav__item is-active" href="index.html" data-nav="home">
+      <span class="bottom-nav__icon" aria-hidden="true">⌂</span>
+      <span class="bottom-nav__text">Home</span>
+    </a>
 
-    // ✅ ZAPIER WEBHOOK (Submit a Deal)
-    // Replace this with your HOME webhook if different:
-    const DEAL_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/26580778/u0oscvm/";
+    <a class="bottom-nav__item bottom-nav__item--cta" href="buyers.html" data-nav="buyers">
+      <span class="bottom-nav__icon" aria-hidden="true">◎</span>
+      <span class="bottom-nav__text">Buyer</span>
+    </a>
 
-    const form = document.getElementById("dealForm");
-    const statusBox = document.getElementById("dealStatus");
-    const submitBtn = document.getElementById("submitBtn");
+    <a class="bottom-nav__item" href="#submit" data-nav="submit">
+      <span class="bottom-nav__icon" aria-hidden="true">＋</span>
+      <span class="bottom-nav__text">Submit</span>
+    </a>
+  </nav>
 
-    const setStatus = (type, msg) => {
-      statusBox.className = "status " + (type === "ok" ? "ok" : "err");
-      statusBox.textContent = msg;
-      statusBox.style.display = "block";
-    };
-
-    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    if (form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const name = (form.elements["name"]?.value || "").trim();
-        const role = (form.elements["role"]?.value || "").trim();
-        const email = (form.elements["email"]?.value || "").trim();
-        const phone = (form.elements["phone"]?.value || "").trim();
-        const summary = (form.elements["summary"]?.value || "").trim();
-
-        if (!name || !role || !email || !summary) {
-          setStatus("err", "Please complete Name, Role, Email, and Deal Summary.");
-          return;
-        }
-        if (!validateEmail(email)) {
-          setStatus("err", "Please enter a valid email address.");
-          return;
-        }
-
-        const payload = {
-          name,
-          role,
-          email,
-          phone,
-          summary,
-          pageUrl: window.location.href,
-          submittedAt: new Date().toISOString(),
-          source: "home_submit_a_deal"
-        };
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
-
-        try {
-          // Best compatibility: FormData + no-cors (Zapier receives; browser doesn't need to read response)
-          const fd = new FormData();
-          Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
-
-          await fetch(DEAL_WEBHOOK_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: fd
-          });
-
-          setStatus("ok", "✅ Deal submitted. We’ll respond quickly.");
-          form.reset();
-
-        } catch (err) {
-          console.error(err);
-          setStatus("err", "❌ Submit failed. Please try again or email Solutions@urbandwell.io.");
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Send Deal";
-        }
-      });
-    }
-  </script>
+  <script src="./script.js"></script>
 </body>
 </html>
