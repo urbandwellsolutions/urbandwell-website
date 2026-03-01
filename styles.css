@@ -436,3 +436,77 @@ input:focus, textarea:focus, select:focus{ border-color: rgba(106,166,255,.65); 
   .bottom-nav{ display:flex; }
   body{ padding-bottom: 92px; }
 }
+/* =========================
+   PREMIUM POLISH PACK
+   (paste at bottom)
+   ========================= */
+
+/* Better tap feel */
+.bottom-nav__item,
+.topnav__link,
+.drawer__link,
+.btn,
+.icon-btn{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iPhone safe area support */
+.bottom-nav{
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+
+/* Micro-animations that feel expensive */
+.bottom-nav__item{
+  transition: transform 120ms ease, background 200ms ease, border-color 200ms ease, filter 200ms ease;
+}
+.bottom-nav__item:active{
+  transform: scale(0.985);
+}
+.btn{
+  transition: transform 120ms ease, filter 200ms ease;
+}
+.btn:active{
+  transform: scale(0.99);
+}
+
+/* CTA feels like the "main action" */
+.bottom-nav__item--cta{
+  box-shadow: 0 16px 45px rgba(0,0,0,0.35);
+}
+
+/* Active nav gets a subtle glow */
+.bottom-nav__item.is-active{
+  filter: drop-shadow(0 10px 20px rgba(106,166,255,0.18));
+}
+
+/* Drawer: fade + slide looks more premium */
+.drawer{
+  opacity: 0.96;
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+.drawer.is-open{ opacity: 1; }
+
+.drawer-overlay{
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.drawer-overlay:not([hidden]){
+  opacity: 1;
+}
+
+/* Improve readability slightly on mobile */
+@media (max-width: 768px){
+  .h1{ letter-spacing: -0.4px; }
+  .lead{ font-size: 15px; }
+  .card{ padding: 20px; }
+}
+
+/* Optional: respects user's motion settings */
+@media (prefers-reduced-motion: reduce){
+  .drawer,
+  .drawer-overlay,
+  .bottom-nav__item,
+  .btn{
+    transition: none !important;
+  }
+}
